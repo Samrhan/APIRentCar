@@ -34,6 +34,12 @@ public class RepositoryBasedCatalogService implements CatalogService {
     }
 
     @Override
+    public Optional<Boolean> deleteCar(UUID id) {
+        Integer deletedCount = catalogRepository.deleteCar(id);
+        return deletedCount > 0 ? Optional.of(true) : Optional.empty();
+    }
+
+    @Override
     public Car addCar(String model, String brand, String color, Integer year, BigDecimal price) {
         return this.catalogRepository.addCar(model, brand, color, year, price);
     }

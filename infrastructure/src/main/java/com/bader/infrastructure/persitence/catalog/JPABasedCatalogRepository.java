@@ -40,6 +40,11 @@ public class JPABasedCatalogRepository implements CatalogRepository {
         return jpaCatalogRepository.save(new CarEntity(id, model, brand, color, year, price)).toModel();
     }
 
+    @Override
+    public Integer deleteCar(UUID id) {
+        return jpaCatalogRepository.deleteById(id);
+    }
+
 
     @Override
     public Car addCar(String model, String brand, String color, Integer year, BigDecimal price) {

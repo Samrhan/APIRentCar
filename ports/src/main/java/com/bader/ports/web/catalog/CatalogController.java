@@ -41,6 +41,15 @@ public class CatalogController {
         );
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<Void> deleteCar(@PathVariable("id") UUID id){
+        if (this.catalogService.deleteCar(id).isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public CarResponse addCar(@RequestBody @Valid CarRequest carRequest) {

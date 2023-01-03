@@ -15,4 +15,6 @@ public interface CatalogService {
     Optional<Car> getCar(UUID id);
 
     Optional<Car> updateCar(UUID id, String model, String brand, String color, Integer year, BigDecimal price);
+
+    Optional<Boolean> deleteCar(UUID id);
 }
