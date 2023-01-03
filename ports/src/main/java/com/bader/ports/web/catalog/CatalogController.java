@@ -2,12 +2,14 @@ package com.bader.ports.web.catalog;
 
 import com.bader.domain.catalog.CatalogService;
 import com.bader.domain.catalog.model.Car;
-import com.bader.ports.web.catalog.dto.request.AddCar;
+import com.bader.ports.web.catalog.dto.request.CarRequest;
 import com.bader.ports.web.catalog.dto.response.CarResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.List;
 
@@ -25,10 +27,24 @@ public class CatalogController {
         return catalogService.getCatalog().stream().map(this::toCarResponse).collect(Collectors.toList());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<CarResponse> getCar(@PathVariable("id") UUID id) {
+        return ResponseEntity.of(
+                catalogService.getCar(id).map(this::toCarResponse)
+        );
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CarResponse> updateCar(@PathVariable("id") UUID id, @RequestBody @Valid CarRequest carRequest) {
+        return ResponseEntity.of(
+                catalogService.updateCar(id, carRequest.getModel(), carRequest.getBrand(), carRequest.getColor(), carRequest.getYear(), carRequest.getPrice()).map(this::toCarResponse)
+        );
+    }
+
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public CarResponse addCar(@RequestBody @Valid AddCar addCar) {
-        return toCarResponse(catalogService.addCar(addCar.getModel(), addCar.getBrand(), addCar.getColor(), addCar.getYear(), addCar.getPrice()));
+    public CarResponse addCar(@RequestBody @Valid CarRequest carRequest) {
+        return toCarResponse(catalogService.addCar(carRequest.getModel(), carRequest.getBrand(), carRequest.getColor(), carRequest.getYear(), carRequest.getPrice()));
     }
 
     private CarResponse toCarResponse(Car car) {

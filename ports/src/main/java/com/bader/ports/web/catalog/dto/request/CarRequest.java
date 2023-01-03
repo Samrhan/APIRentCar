@@ -4,9 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-public class AddCar {
+public class CarRequest {
     @NotBlank
     private String model;
 
@@ -16,14 +17,14 @@ public class AddCar {
     @NotBlank
     private String color;
 
-    @NotBlank
+    @NotNull
     private Integer year;
 
-    @NotBlank
+    @NotNull
     private BigDecimal price;
 
     @JsonCreator
-    public AddCar(@JsonProperty("model") String model, @JsonProperty("brand") String brand, @JsonProperty("color") String color, @JsonProperty("year") Integer year, @JsonProperty("price") BigDecimal price) {
+    public CarRequest(@JsonProperty("model") String model, @JsonProperty("brand") String brand, @JsonProperty("color") String color, @JsonProperty("year") Integer year, @JsonProperty("price") BigDecimal price) {
         this.model = model;
         this.brand = brand;
         this.color = color;

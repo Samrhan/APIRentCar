@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ServiceConfiguration {
+public class CatalogServiceConfiguration {
     @Bean
     public RepositoryBasedCatalogService repositoryBasedCatalogService(CatalogRepository catalogRepository) {
         return new RepositoryBasedCatalogService(catalogRepository);

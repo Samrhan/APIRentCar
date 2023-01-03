@@ -2,6 +2,7 @@ package com.bader.infrastructure.persitence.catalog.entity;
 
 import com.bader.domain.catalog.model.Car;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.PersistenceCreator;
 
 import javax.persistence.Column;
@@ -11,12 +12,13 @@ import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-@Entity
+@Entity(name="CarEntity")
 public class CarEntity {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Type(type="org.hibernate.type.UUIDCharType")
     UUID id;
 
     @Column(name = "MODEL", nullable = false)
@@ -28,7 +30,7 @@ public class CarEntity {
     @Column(name = "COLOR", nullable = false)
     String color;
 
-    @Column(name = "YEAR", nullable = false)
+    @Column(name = "RELEASE_YEAR", nullable = false)
     Integer year;
 
     @Column(name = "PRICE", nullable = false)
@@ -42,17 +44,16 @@ public class CarEntity {
         this.year = year;
         this.price = price;
     }
-
-    public CarEntity(Car car) {
-        this.model = car.getModel();
-        this.brand = car.getBrand();
-        this.color = car.getColor();
-        this.year = car.getYear();
-        this.price = car.getPrice();
-        this.id = car.getId();
+    protected CarEntity() {
     }
 
-    protected CarEntity() {
+    public CarEntity(UUID id, String model, String brand, String color, Integer year, BigDecimal price) {
+        this.id = id;
+        this.model = model;
+        this.brand = brand;
+        this.color = color;
+        this.year = year;
+        this.price = price;
     }
 
     public Car toModel() {
