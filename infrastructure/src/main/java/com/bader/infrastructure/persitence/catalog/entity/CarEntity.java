@@ -19,22 +19,22 @@ public class CarEntity {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Type(type="org.hibernate.type.UUIDCharType")
-    UUID id;
+    private UUID id;
 
     @Column(name = "MODEL", nullable = false)
-    String model;
+    private String model;
 
     @Column(name = "BRAND", nullable = false)
-    String brand;
+    private String brand;
 
     @Column(name = "COLOR", nullable = false)
-    String color;
+    private String color;
 
     @Column(name = "RELEASE_YEAR", nullable = false)
-    Integer year;
+    private Integer year;
 
     @Column(name = "PRICE", nullable = false)
-    BigDecimal price;
+    private BigDecimal price;
 
     @PersistenceCreator
     public CarEntity(String model, String brand, String color, Integer year, BigDecimal price) {
