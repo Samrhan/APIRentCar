@@ -3,7 +3,6 @@ package com.bader.domain.rental.model;
 import com.bader.domain.IAM.model.Customer;
 import com.bader.domain.catalog.model.Car;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class CartEntry {
@@ -23,31 +22,15 @@ public class CartEntry {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
     public Car getCar() {
         return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
     }
 
     public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
     public Date getEndDate() {
         return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
     }
 }
