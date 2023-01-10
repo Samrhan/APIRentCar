@@ -4,18 +4,26 @@ import com.bader.domain.IAM.model.Customer;
 import com.bader.domain.catalog.model.Car;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class CartEntry {
+
+    private UUID id;
     private Customer customer;
     private Car car;
     private Date startDate;
     private Date endDate;
 
-    public CartEntry(Customer customer, Car car, Date startDate, Date endDate) {
+    public CartEntry(UUID id, Customer customer, Car car, Date startDate, Date endDate) {
+        this.id = id;
         this.customer = customer;
         this.car = car;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public Customer getCustomer() {

@@ -54,6 +54,6 @@ public class CartEntryEntity {
     }
 
     public CartEntry toModel(){
-        return new CartEntry(customer.toModel(), car.toModel(), startDate, endDate);
+        return new CartEntry(id, customer.toModel(), car.toModel(), startDate, endDate);
     }
 }
