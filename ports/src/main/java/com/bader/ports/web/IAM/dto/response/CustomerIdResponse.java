@@ -4,10 +4,10 @@ import com.bader.domain.IAM.model.Customer;
 
 import java.util.UUID;
 
-public class CustomerResponse {
+public class CustomerIdResponse {
     private final UUID id;
 
-    public CustomerResponse(Customer customer) {
+    public CustomerIdResponse(Customer customer) {
         this.id = customer.getId();
     }
 

@@ -32,7 +32,6 @@ public class JPABasedCatalogRepository implements CatalogRepository {
 
     @Override
     public Optional<Car> getCar(UUID id) {
-        System.out.println(jpaCatalogRepository.findById(id));
         return jpaCatalogRepository.findById(id).map(CarEntity::toModel);
     }
 
