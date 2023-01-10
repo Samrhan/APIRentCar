@@ -44,10 +44,11 @@ public class CatalogController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteCar(@PathVariable("id") UUID id){
-        if (this.catalogService.deleteCar(id).isEmpty()) {
-            return ResponseEntity.notFound().build();
+        // If the deletion succeeds, return 204 as there is now no content. Otherwise, return 404 since the entity doesn't exist
+        if (this.catalogService.deleteCar(id)) {
+            return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping()

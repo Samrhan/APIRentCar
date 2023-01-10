@@ -16,5 +16,5 @@ public interface CatalogRepository {
 
     Car save(UUID id, String model, String brand, String color, Integer year, BigDecimal price);
 
-    Integer deleteCar(UUID id);
+    boolean deleteCar(UUID id);
 }

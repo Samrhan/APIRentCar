@@ -3,6 +3,7 @@ package com.bader.infrastructure.persitence.catalog;
 import com.bader.domain.catalog.model.Car;
 import com.bader.domain.catalog.repository.CatalogRepository;
 import com.bader.infrastructure.persitence.catalog.entity.CarEntity;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -41,8 +42,15 @@ public class JPABasedCatalogRepository implements CatalogRepository {
     }
 
     @Override
-    public Integer deleteCar(UUID id) {
-        return jpaCatalogRepository.deleteById(id);
+    public boolean deleteCar(UUID id) {
+        try {
+            jpaCatalogRepository.deleteById(id);
+            return true;
+        } catch (EmptyResultDataAccessException e){
+            // If the car does not exist, deleteById throws an EmptyResultDataAccessException
+            // So we "cast" it to a simple false
+            return false;
+        }
     }
 
 
