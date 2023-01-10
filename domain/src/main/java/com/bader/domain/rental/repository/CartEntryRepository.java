@@ -4,6 +4,6 @@ import com.bader.domain.rental.model.CartEntry;
 
 import java.util.List;
 
-public interface RentalRepository {
+public interface CartEntryRepository {
     List<CartEntry> getCart();
 }
