@@ -27,12 +27,11 @@ public class CustomerEntity {
     @Column(name = "PHONE", nullable = false)
     private String phone;
 
-    @Column(name = "EMAIL", nullable = false)
+    @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
 
 
     @PersistenceCreator
-
     public CustomerEntity(String firstName, String lastName, String phone, String email) {
         this.firstName = firstName;
         this.lastName = lastName;

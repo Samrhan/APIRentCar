@@ -1,7 +1,12 @@
 package com.bader.infrastructure.persitence.IAM;
 
+import com.bader.domain.IAM.model.Customer;
 import com.bader.domain.IAM.repository.CustomerRepository;
+import com.bader.infrastructure.persitence.IAM.entity.CustomerEntity;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 @Repository
 public class JPABasedCustomerRepository implements CustomerRepository {
@@ -9,5 +14,14 @@ public class JPABasedCustomerRepository implements CustomerRepository {
 
     public JPABasedCustomerRepository(JPACustomerRepository jpaCustomerRepository) {
         this.jpaCustomerRepository = jpaCustomerRepository;
+    }
+
+    @Override
+    public Optional<Customer> createCustomer(String firstName, String lastName, String email, String phone) {
+        try {
+            return Optional.of(jpaCustomerRepository.save(new CustomerEntity(firstName, lastName, email, phone)).toModel());
+        } catch (DataAccessException e){
+            return Optional.empty();
+        }
     }
 }
