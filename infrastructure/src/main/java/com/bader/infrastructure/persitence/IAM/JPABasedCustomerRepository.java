@@ -18,9 +18,9 @@ public class JPABasedCustomerRepository implements CustomerRepository {
     }
 
     @Override
-    public Optional<Customer> createCustomer(String firstName, String lastName, String email, String phone) {
+    public Optional<Customer> createCustomer(String firstName, String lastName, String phone, String email) {
         try {
-            return Optional.of(jpaCustomerRepository.save(new CustomerEntity(firstName, lastName, email, phone)).toModel());
+            return Optional.of(jpaCustomerRepository.save(new CustomerEntity(firstName, lastName, phone, email)).toModel());
         } catch (DataAccessException e){
             return Optional.empty();
         }
@@ -29,5 +29,10 @@ public class JPABasedCustomerRepository implements CustomerRepository {
     @Override
     public Optional<Customer> getCustomer(UUID id) {
         return jpaCustomerRepository.findById(id).map(CustomerEntity::toModel);
+    }
+
+    @Override
+    public Optional<Customer> getCustomerByEmail(String email) {
+        return jpaCustomerRepository.findByEmail(email).map(CustomerEntity::toModel);
     }
 }

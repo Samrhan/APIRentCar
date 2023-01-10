@@ -6,7 +6,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface CustomerRepository {
-    Optional<Customer> createCustomer(String firstName, String lastName, String email, String phone);
+    Optional<Customer> createCustomer(String firstName, String lastName, String phone, String email);
 
     Optional<Customer> getCustomer(UUID id);
+
+    Optional<Customer> getCustomerByEmail(String email);
 }

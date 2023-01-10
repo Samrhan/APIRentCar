@@ -14,12 +14,17 @@ public class RepositoryBasedIAMService implements IAMService {
     }
 
     @Override
-    public Optional<Customer> createCustomer(String firstName, String lastName, String email, String phone) {
-        return this.customerRepository.createCustomer(firstName, lastName, email, phone);
+    public Optional<Customer> createCustomer(String firstName, String lastName, String phone, String email) {
+        return this.customerRepository.createCustomer(firstName, lastName, phone, email);
     }
 
     @Override
-    public Optional<Customer> getCustmer(UUID id) {
+    public Optional<Customer> getCustomer(UUID id) {
         return this.customerRepository.getCustomer(id);
+    }
+
+    @Override
+    public Optional<Customer> getCustomerByEmail(String email) {
+        return this.customerRepository.getCustomerByEmail(email);
     }
 }

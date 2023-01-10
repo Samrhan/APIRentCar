@@ -25,15 +25,22 @@ public class IAMController {
     @GetMapping("/customer/{id}")
     public ResponseEntity<CustomerDetailResponse> getCustomerDetails(@PathVariable("id") UUID id){
         return ResponseEntity.of(
-                iamService.getCustmer(id)
+                iamService.getCustomer(id)
                         .map(this::toCustomerDetailResponse)
+        );
+    }
+
+    @GetMapping("/customer/search")
+    public ResponseEntity<CustomerIdResponse> findCustomerByEmail(@RequestParam String email){
+        return ResponseEntity.of(
+                iamService.getCustomerByEmail(email).map(this::toCustomerIdResponse)
         );
     }
 
     @PostMapping("/customer")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<CustomerIdResponse> createCustomer(@RequestBody @Valid CreateCustomerRequest request){
-        Optional<Customer> createdCustomer = iamService.createCustomer(request.getFirstName(), request.getLastName(), request.getEmail(), request.getPhone());
+        Optional<Customer> createdCustomer = iamService.createCustomer(request.getFirstName(), request.getLastName(), request.getPhone(), request.getEmail());
         if (createdCustomer.isEmpty()){
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         } else {

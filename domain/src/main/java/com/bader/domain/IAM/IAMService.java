@@ -6,7 +6,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface IAMService {
-    Optional<Customer> createCustomer(String firstName, String lastName, String email, String phone);
+    Optional<Customer> createCustomer(String firstName, String lastName, String phone, String email);
 
-    Optional<Customer> getCustmer(UUID id);
+    Optional<Customer> getCustomer(UUID id);
+
+    Optional<Customer> getCustomerByEmail(String email);
 }
