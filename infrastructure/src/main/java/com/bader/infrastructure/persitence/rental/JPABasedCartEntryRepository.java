@@ -10,9 +10,11 @@ import java.util.*;
 @Repository
 public class JPABasedCartEntryRepository implements CartEntryRepository {
     private final JPACartEntryRepository jpaCartEntryRepository;
+    private final JPAReservationRepository jpaReservationRepository;
 
-    public JPABasedCartEntryRepository(JPACartEntryRepository jpaCartEntryRepository) {
+    public JPABasedCartEntryRepository(JPACartEntryRepository jpaCartEntryRepository, JPAReservationRepository jpaReservationRepository) {
         this.jpaCartEntryRepository = jpaCartEntryRepository;
+        this.jpaReservationRepository = jpaReservationRepository;
     }
 
     @Override
@@ -21,8 +23,8 @@ public class JPABasedCartEntryRepository implements CartEntryRepository {
     }
 
     @Override
-    public Optional<CartEntry> addCartEntry(UUID carId, Date startDate, Date endDate) {
-        return Optional.empty();
+    public CartEntry addCartEntry(UUID carId, Date startDate, Date endDate) {
+        return null;
     }
 
     @Override

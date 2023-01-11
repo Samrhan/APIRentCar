@@ -1,6 +1,6 @@
 package com.bader.infrastructure.persitence.rental.entity;
 
-import com.bader.domain.rental.model.CartEntry;
+import com.bader.domain.rental.model.Reservation;
 import com.bader.infrastructure.persitence.IAM.entity.CustomerEntity;
 import com.bader.infrastructure.persitence.catalog.entity.CarEntity;
 import org.hibernate.annotations.GenericGenerator;
@@ -11,8 +11,9 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
-@Entity(name = "CartEntryEntity")
-public class CartEntryEntity {
+@Entity(name = "ReservationEntity")
+public class ReservationEntity {
+
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -33,26 +34,31 @@ public class CartEntryEntity {
     @Temporal(TemporalType.DATE)
     private Date endDate;
 
+    @Column()
+    private Boolean paid;
+
     @PersistenceCreator
-    public CartEntryEntity(CustomerEntity customer, CarEntity car, Date startDate, Date endDate) {
+    public ReservationEntity(CustomerEntity customer, CarEntity car, Date startDate, Date endDate, Boolean paid) {
         this.customer = customer;
         this.car = car;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.paid = paid;
     }
 
-    public CartEntryEntity() {
+    public ReservationEntity() {
     }
 
-    public CartEntryEntity(UUID id, CustomerEntity customer, CarEntity car, Date startDate, Date endDate) {
+    public ReservationEntity(UUID id, CustomerEntity customer, CarEntity car, Date startDate, Date endDate, Boolean paid) {
         this.id = id;
         this.customer = customer;
         this.car = car;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.paid = paid;
     }
 
-    public CartEntry toModel(){
-        return new CartEntry(id, customer.toModel(), car.toModel(), startDate, endDate);
+    public Reservation toModel(){
+        return new Reservation(id, customer.toModel(), car.toModel(), startDate, endDate, paid);
     }
 }
