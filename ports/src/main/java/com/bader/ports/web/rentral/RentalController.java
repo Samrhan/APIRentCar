@@ -2,7 +2,9 @@ package com.bader.ports.web.rentral;
 
 import com.bader.domain.rental.RentalService;
 import com.bader.domain.rental.model.CartEntry;
+import com.bader.domain.rental.model.Reservation;
 import com.bader.ports.web.rentral.dto.request.CartEntryRequest;
+import com.bader.ports.web.rentral.dto.response.AnonymousReservationResponse;
 import com.bader.ports.web.rentral.dto.response.CartEntryResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,7 +55,15 @@ public class RentalController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/car/{carId}/reservations")
+    public List<AnonymousReservationResponse> getFutureReservationsForCar(@PathVariable("carId") UUID carId){
+        return rentalService.getFutureReservationsForCar(carId).stream().map(this::toAnonymousReservationResponse).collect(Collectors.toList());
+    }
+
     private CartEntryResponse toCartEntryResponse(CartEntry cartEntry) {
         return new CartEntryResponse(cartEntry);
+    }
+    private AnonymousReservationResponse toAnonymousReservationResponse(Reservation reservation){
+        return new AnonymousReservationResponse(reservation);
     }
 }

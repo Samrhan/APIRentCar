@@ -1,7 +1,6 @@
 package com.bader.domain.rental.repository;
 
 import com.bader.domain.rental.model.CartEntry;
-import com.bader.domain.rental.model.Reservation;
 
 import java.util.Date;
 import java.util.List;
@@ -15,6 +14,4 @@ public interface CartEntryRepository {
     boolean deleteCart();
 
     boolean deleteCartEntry(UUID cartEntryId);
-
-    List<Reservation> getReservationsBetween(UUID carId, Date startDate, Date endDate);
 }
