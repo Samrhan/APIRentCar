@@ -29,8 +29,10 @@ public class RentalController {
 
     @PostMapping("/cart")
     @ResponseStatus(HttpStatus.CREATED)
-    public CartEntryResponse addCartEntry(@RequestBody @Valid CartEntryRequest request) {
-        return toCartEntryResponse(rentalService.addCartEntry(request.getCarId(), request.getStartDate(), request.getEndDate()));
+    public ResponseEntity<CartEntryResponse> addCartEntry(@RequestBody @Valid CartEntryRequest request) {
+        return ResponseEntity.of(
+                rentalService.addCartEntry(request.getCarId(), request.getStartDate(), request.getEndDate()).map(this::toCartEntryResponse)
+        );
     }
 
     @DeleteMapping("/cart/{cartEntryId}")
