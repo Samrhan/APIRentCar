@@ -1,11 +1,11 @@
 package com.bader.domain.search;
 
-import com.bader.domain.search.repository.SearchRepository;
+import com.bader.domain.catalog.repository.CatalogRepository;
 
 public class RepositoryBasedSearchService implements SearchService {
-    private final SearchRepository searchRepository;
+    private final CatalogRepository catalogRepository;
 
-    public RepositoryBasedSearchService(SearchRepository searchRepository) {
-        this.searchRepository = searchRepository;
+    public RepositoryBasedSearchService(CatalogRepository catalogRepository) {
+        this.catalogRepository = catalogRepository;
     }
 }
