@@ -32,7 +32,6 @@ public class JPABasedCatalogRepository implements CatalogRepository {
 
     @Override
     public Optional<Car> getCar(UUID id) {
-        System.out.println(jpaCatalogRepository.findById(id));
         return jpaCatalogRepository.findById(id).map(CarEntity::toModel);
     }
 
@@ -53,9 +52,16 @@ public class JPABasedCatalogRepository implements CatalogRepository {
         }
     }
 
-
     @Override
     public Car addCar(String model, String brand, String color, Integer year, BigDecimal price) {
         return jpaCatalogRepository.save(new CarEntity(model, brand, color, year, price)).toModel();
+    }
+
+    @Override
+    public List<Car> searchCar(String model, String brand, String color, Integer year, BigDecimal priceMin, BigDecimal priceMax) {
+        return StreamSupport
+                .stream(jpaCatalogRepository.findAllByOptionalEntityFields(model, brand, color, year, priceMin, priceMax).spliterator(), false)
+                .map(CarEntity::toModel)
+                .collect(Collectors.toList());
     }
 }
