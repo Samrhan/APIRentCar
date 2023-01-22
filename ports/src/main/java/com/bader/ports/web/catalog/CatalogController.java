@@ -4,11 +4,15 @@ import com.bader.domain.catalog.CatalogService;
 import com.bader.domain.catalog.model.Car;
 import com.bader.ports.web.catalog.dto.request.CarRequest;
 import com.bader.ports.web.catalog.dto.response.CarResponse;
+import com.bader.ports.web.security.SecurityConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.List;
@@ -42,6 +46,7 @@ public class CatalogController {
     }
 
     @DeleteMapping("/{id}")
+    @RolesAllowed({SecurityConfiguration.SELLER, SecurityConfiguration.ADMIN})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteCar(@PathVariable("id") UUID id){
         // If the deletion succeeds, return 204 as there is now no content. Otherwise, return 404 since the entity doesn't exist
@@ -53,7 +58,7 @@ public class CatalogController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public CarResponse addCar(@RequestBody @Valid CarRequest carRequest) {
+    public CarResponse addCar(@RequestBody @Valid CarRequest carRequest, Principal principal) {
         return toCarResponse(catalogService.addCar(carRequest.getModel(), carRequest.getBrand(), carRequest.getColor(), carRequest.getYear(), carRequest.getPrice()));
     }
 

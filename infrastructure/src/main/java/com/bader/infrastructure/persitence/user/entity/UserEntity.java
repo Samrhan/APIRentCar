@@ -1,11 +1,16 @@
 package com.bader.infrastructure.persitence.user.entity;
 
+import com.bader.domain.user.model.Authority;
+import com.bader.domain.user.model.User;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.PersistenceCreator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -24,11 +29,10 @@ public class UserEntity implements Serializable {
     private List<AuthorityEntity> authorities = new ArrayList<>();
 
     @PersistenceCreator
-    public UserEntity(String username, String password, boolean enabled, List<AuthorityEntity> authorities) {
+    public UserEntity(String username, String password, boolean enabled) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
-        this.authorities = authorities;
     }
 
     public UserEntity() {
@@ -48,5 +52,17 @@ public class UserEntity implements Serializable {
 
     public String getUsername() {
         return username;
+    }
+
+    public User toUser() {
+        List<Authority> authorities = new ArrayList<>();
+        for (AuthorityEntity authorityEntity : this.authorities) {
+            authorities.add(authorityEntity.toAuthority());
+        }
+        return new User(username, password, enabled, authorities);
+    }
+
+    public void setAuthorities(List<AuthorityEntity> authorities) {
+        this.authorities = authorities;
     }
 }
