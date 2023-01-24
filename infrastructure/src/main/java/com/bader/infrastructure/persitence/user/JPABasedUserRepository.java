@@ -28,11 +28,11 @@ public class JPABasedUserRepository implements UserRepository {
                     .collect(Collectors.toList());
             jpaAuthorityRepository.saveAll(authorities);
         }
-        return userEntity.toUser();
+        return userEntity.toModel();
     }
 
     @Override
     public User findById(String username) {
-        return jpaUserRepository.findById(username).map(UserEntity::toUser).orElse(null);
+        return jpaUserRepository.findById(username).map(UserEntity::toModel).orElse(null);
     }
 }

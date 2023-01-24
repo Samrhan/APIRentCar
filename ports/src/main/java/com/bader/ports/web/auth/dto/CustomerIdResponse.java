@@ -1,6 +1,6 @@
-package com.bader.ports.web.IAM.dto.response;
+package com.bader.ports.web.auth.dto;
 
-import com.bader.domain.IAM.model.Customer;
+import com.bader.domain.user.model.Customer;
 
 import java.util.UUID;
 

@@ -1,6 +1,6 @@
-package com.bader.infrastructure.persitence.IAM.entity;
+package com.bader.infrastructure.persitence.user.entity;
 
-import com.bader.domain.IAM.model.Customer;
+import com.bader.domain.user.model.Customer;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.PersistenceCreator;
@@ -24,33 +24,29 @@ public class CustomerEntity {
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
-    @Column(name = "PHONE", nullable = false)
-    private String phone;
-
-    @Column(name = "EMAIL", nullable = false, unique = true)
-    private String email;
-
+    @OneToOne(targetEntity = UserEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private UserEntity associatedUser;
 
     @PersistenceCreator
-    public CustomerEntity(String firstName, String lastName, String phone, String email) {
+    public CustomerEntity(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phone = phone;
-        this.email = email;
     }
 
     public CustomerEntity() {
     }
 
-    public CustomerEntity(UUID id, String firstName, String lastName, String phone, String email) {
+    public CustomerEntity(UUID id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phone = phone;
-        this.email = email;
     }
 
     public Customer toModel(){
-        return new Customer(id, firstName, lastName, phone, email);
+        return new Customer(id, firstName, lastName, associatedUser.toModel());
+    }
+
+    public void setAssociatedUser(UserEntity associatedUser) {
+        this.associatedUser = associatedUser;
     }
 }

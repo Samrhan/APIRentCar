@@ -1,12 +1,12 @@
-package com.bader.domain.IAM.repository;
+package com.bader.domain.user.repository;
 
-import com.bader.domain.IAM.model.Customer;
+import com.bader.domain.user.model.Customer;
 
 import java.util.Optional;
 import java.util.UUID;
 
 public interface CustomerRepository {
-    Optional<Customer> createCustomer(String firstName, String lastName, String phone, String email);
+    Optional<Customer> createCustomer(String firstName, String lastName, String associatedUserUsername);
 
     Optional<Customer> getCustomer(UUID id);
 

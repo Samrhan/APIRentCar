@@ -1,6 +1,6 @@
 package com.bader.domain.rental.model;
 
-import com.bader.domain.IAM.model.Customer;
+import com.bader.domain.user.model.Customer;
 import com.bader.domain.catalog.model.Car;
 
 import java.util.Date;
