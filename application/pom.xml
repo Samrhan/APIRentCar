@@ -11,7 +11,7 @@
 
     <parent>
         <groupId>com.bader</groupId>
-        <artifactId>todomvc-backend</artifactId>
+        <artifactId>api-rentcar</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -57,9 +57,18 @@
                         </goals>
                         <configuration>
                            <includes>
-                               <include>com.bader.domain</include>
-                               <include>com.bader.infrastructure</include>
-                               <include>com.bader.ports</include>
+                               <include>
+                                   <groupId>com.bader</groupId>
+                                   <artifactId>domain</artifactId>
+                               </include>
+                               <include>
+                                   <groupId>com.bader</groupId>
+                                   <artifactId>infrastructure</artifactId>
+                               </include>
+                               <include>
+                                   <groupId>com.bader</groupId>
+                                   <artifactId>ports</artifactId>
+                               </include>
                            </includes>
                         </configuration>
                     </execution>

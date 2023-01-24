@@ -6,7 +6,7 @@ spring:
     hikari:
       connection-timeout: 20000
       maximum-pool-size: 5
-    url: jdbc:postgresql://localhost:5432/rentcar?user=postgres&password=postgres
+    url: jdbc:postgresql://localhost:5435/rentcar?user=postgres&password=postgres
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

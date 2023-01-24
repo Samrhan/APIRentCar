@@ -15,10 +15,10 @@
         <version>2.7.3</version>
     </parent>
     <groupId>com.bader</groupId>
-    <artifactId>todomvc-backend</artifactId>
+    <artifactId>api-rentcar</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>todomvc-backend</name>
-    <description>todomvc-backend</description>
+    <name>api-rentcar</name>
+    <description>api-rentcar</description>
     <properties>
         <java.version>1.18</java.version>
         <target.java.version>1.8</target.java.version>
@@ -37,6 +37,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
