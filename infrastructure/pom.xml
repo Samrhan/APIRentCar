@@ -56,8 +56,9 @@
 
     <parent>
         <groupId>com.bader</groupId>
-        <artifactId>todomvc-backend</artifactId>
+        <artifactId>api-rentcar</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <build>

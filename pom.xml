@@ -15,10 +15,10 @@
         <version>2.7.3</version>
     </parent>
     <groupId>com.bader</groupId>
-    <artifactId>todomvc-backend</artifactId>
+    <artifactId>api-rentcar</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>todomvc-backend</name>
-    <description>todomvc-backend</description>
+    <name>api-rentcar</name>
+    <description>api-rentcar</description>
     <properties>
         <java.version>1.18</java.version>
         <target.java.version>1.8</target.java.version>
