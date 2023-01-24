@@ -1,3 +1,7 @@
 /.idea/
 target
 postgres-data
+application.iml
+domain.iml
+ports.iml
+infrastructure.iml
