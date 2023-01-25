@@ -7,6 +7,7 @@ import com.bader.infrastructure.persitence.catalog.entity.CarEntity;
 import com.bader.infrastructure.persitence.rental.entity.CartEntryEntity;
 import com.bader.infrastructure.persitence.user.JPACustomerRepository;
 import com.bader.infrastructure.persitence.user.entity.CustomerEntity;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -49,7 +50,16 @@ public class JPABasedCartEntryRepository implements CartEntryRepository {
     }
 
     @Override
-    public boolean deleteCart() {
+    public boolean deleteCart(String associatedUserUsername) {
+        Optional<CustomerEntity> customer = jpaCustomerRepository.findByEmail(associatedUserUsername);
+        if (customer.isPresent()) {
+            try {
+                jpaCartEntryRepository.deleteAllByCustomer(customer.get());
+                return true;
+            } catch (EmptyResultDataAccessException e) {
+                return false;
+            }
+        }
         return false;
     }
 

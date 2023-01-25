@@ -49,8 +49,8 @@ public class RentalController {
 
     @DeleteMapping("/cart")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> deleteCartEntry(){
-        if (rentalService.deleteCart()) {
+    public ResponseEntity<Void> deleteCartEntry(Principal customer){
+        if (rentalService.deleteCart(customer.getName())) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();

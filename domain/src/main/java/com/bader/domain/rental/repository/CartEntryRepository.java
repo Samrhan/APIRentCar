@@ -11,7 +11,7 @@ public interface CartEntryRepository {
 
     CartEntry addCartEntry(String associatedUserUsername, UUID carId, Date startDate, Date endDate);
 
-    boolean deleteCart();
+    boolean deleteCart(String associatedUserUsername);
 
     boolean deleteCartEntry(UUID cartEntryId);
 }

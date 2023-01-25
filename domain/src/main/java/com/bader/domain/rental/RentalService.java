@@ -8,7 +8,7 @@ import java.util.*;
 public interface RentalService {
     List<CartEntry> getCart(String associatedUserUsername);
 
-    boolean deleteCart();
+    boolean deleteCart(String associatedUserUsername);
 
     Optional<CartEntry> addCartEntry(String associatedUserUsername, UUID carId, Date startDate, Date endDate);
 

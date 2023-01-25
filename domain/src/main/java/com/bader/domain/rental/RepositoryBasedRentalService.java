@@ -26,8 +26,8 @@ public class RepositoryBasedRentalService implements RentalService {
     }
 
     @Override
-    public boolean deleteCart() {
-        return this.cartEntryRepository.deleteCart();
+    public boolean deleteCart(String associatedUserUsername) {
+        return this.cartEntryRepository.deleteCart(associatedUserUsername);
     }
 
     @Override
