@@ -32,9 +32,9 @@ public class RentalController {
 
     @PostMapping("/cart")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<CartEntryResponse> addCartEntry(@RequestBody @Valid CartEntryRequest request) {
+    public ResponseEntity<CartEntryResponse> addCartEntry(@RequestBody @Valid CartEntryRequest request, Principal customer) {
         return ResponseEntity.of(
-                rentalService.addCartEntry(request.getCarId(), request.getStartDate(), request.getEndDate()).map(this::toCartEntryResponse)
+                rentalService.addCartEntry(customer.getName(), request.getCarId(), request.getStartDate(), request.getEndDate()).map(this::toCartEntryResponse)
         );
     }
 

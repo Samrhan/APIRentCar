@@ -10,7 +10,7 @@ public interface RentalService {
 
     boolean deleteCart();
 
-    Optional<CartEntry> addCartEntry(UUID carId, Date startDate, Date endDate);
+    Optional<CartEntry> addCartEntry(String associatedUserUsername, UUID carId, Date startDate, Date endDate);
 
     boolean deleteCartEntry(UUID cartEntryId);
 

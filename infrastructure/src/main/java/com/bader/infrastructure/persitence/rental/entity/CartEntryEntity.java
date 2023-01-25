@@ -20,11 +20,11 @@ public class CartEntryEntity {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", nullable = false)
+    @JoinColumn(name = "customer", nullable = false)
     private CustomerEntity customer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "car_id", nullable = false)
+    @JoinColumn(name = "car", nullable = false)
     private CarEntity car;
 
     @Temporal(TemporalType.DATE)

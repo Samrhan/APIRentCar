@@ -31,9 +31,9 @@ public class RepositoryBasedRentalService implements RentalService {
     }
 
     @Override
-    public Optional<CartEntry> addCartEntry(UUID carId, Date startDate, Date endDate) {
+    public Optional<CartEntry> addCartEntry(String associatedUserUsername, UUID carId, Date startDate, Date endDate) {
         if(isCarAvailableBetween(carId, startDate, endDate)){
-            return Optional.ofNullable(this.cartEntryRepository.addCartEntry(carId, startDate, endDate));
+            return Optional.ofNullable(this.cartEntryRepository.addCartEntry(associatedUserUsername, carId, startDate, endDate));
         }
         return Optional.empty();
     }

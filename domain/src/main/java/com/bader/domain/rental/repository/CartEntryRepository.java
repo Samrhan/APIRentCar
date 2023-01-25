@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface CartEntryRepository {
     List<CartEntry> getCart(String associatedUserUsername);
 
-    CartEntry addCartEntry(UUID carId, Date startDate, Date endDate);
+    CartEntry addCartEntry(String associatedUserUsername, UUID carId, Date startDate, Date endDate);
 
     boolean deleteCart();
 

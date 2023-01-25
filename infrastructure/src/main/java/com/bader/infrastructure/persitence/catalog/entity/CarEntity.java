@@ -59,4 +59,28 @@ public class CarEntity {
     public Car toModel() {
         return new Car(id, model, brand, color, year, price);
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
 }
