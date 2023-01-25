@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -25,8 +26,8 @@ public class RentalController {
     }
 
     @GetMapping("/cart")
-    public List<CartEntryResponse> getCart() {
-        return rentalService.getCart().stream().map(this::toCartEntryResponse).collect(Collectors.toList());
+    public List<CartEntryResponse> getCart(Principal customer) {
+        return rentalService.getCart(customer.getName()).stream().map(this::toCartEntryResponse).collect(Collectors.toList());
     }
 
     @PostMapping("/cart")

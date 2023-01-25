@@ -6,7 +6,7 @@ import com.bader.domain.rental.model.Reservation;
 import java.util.*;
 
 public interface RentalService {
-    List<CartEntry> getCart();
+    List<CartEntry> getCart(String associatedUserUsername);
 
     boolean deleteCart();
 

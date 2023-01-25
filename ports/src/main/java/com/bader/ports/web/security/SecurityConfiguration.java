@@ -68,7 +68,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .mvcMatchers(HttpMethod.DELETE, "/catalog/**").authenticated() // All other need auth
                 .and()
                 .authorizeRequests()
-                .mvcMatchers("/rental.**").authenticated()
+                .mvcMatchers("/rental/**").authenticated()
                 .and()
                 .authorizeRequests()
                 .anyRequest().denyAll()

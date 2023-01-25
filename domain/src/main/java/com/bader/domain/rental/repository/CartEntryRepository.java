@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CartEntryRepository {
-    List<CartEntry> getCart();
+    List<CartEntry> getCart(String associatedUserUsername);
 
     CartEntry addCartEntry(UUID carId, Date startDate, Date endDate);
 

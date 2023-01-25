@@ -49,4 +49,20 @@ public class CustomerEntity {
     public void setAssociatedUser(UserEntity associatedUser) {
         this.associatedUser = associatedUser;
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public UserEntity getAssociatedUser() {
+        return associatedUser;
+    }
 }

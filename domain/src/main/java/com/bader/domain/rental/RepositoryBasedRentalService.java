@@ -21,8 +21,8 @@ public class RepositoryBasedRentalService implements RentalService {
     }
 
     @Override
-    public List<CartEntry> getCart() {
-        return this.cartEntryRepository.getCart();
+    public List<CartEntry> getCart(String associatedUserUsername) {
+        return this.cartEntryRepository.getCart(associatedUserUsername);
     }
 
     @Override
