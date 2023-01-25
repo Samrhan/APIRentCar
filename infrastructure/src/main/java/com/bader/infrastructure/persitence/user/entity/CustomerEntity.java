@@ -24,7 +24,7 @@ public class CustomerEntity {
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
-    @OneToOne(targetEntity = UserEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = UserEntity.class, optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private UserEntity associatedUser;
 
     @PersistenceCreator

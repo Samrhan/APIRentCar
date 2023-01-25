@@ -20,16 +20,22 @@ public class RepositoryBasedUserService implements UserService {
     }
 
     @Override
-    public void registerCustomer(String username, String password, String role, String firstName, String lastName) {
+    public boolean registerCustomer(String username, String password, String role, String firstName, String lastName) {
         List<Authority> authorities = List.of(new Authority(role));
-        User user = userRepository.save(new User(username, password, true, authorities));
-        this.customerRepository.createCustomer(firstName, lastName, user.getUsername());
+        Optional<User> user = userRepository.createUser(new User(username, password, true, authorities));
+        if (user.isEmpty()){
+            return false;
+        }
+
+        Optional<Customer> addedCustomer = this.customerRepository.createCustomer(firstName, lastName, user.get().getUsername());
+        return addedCustomer.isPresent();
     }
 
     @Override
-    public void registerSeller(String username, String password, String role) {
+    public boolean registerSeller(String username, String password, String role) {
         List<Authority> authorities = List.of(new Authority(role));
-        userRepository.save(new User(username, password, true, authorities));
+        Optional<User> user = userRepository.createUser(new User(username, password, true, authorities));
+        return user.isPresent();
     }
 
     @Override

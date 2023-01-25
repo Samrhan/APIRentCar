@@ -2,8 +2,10 @@ package com.bader.domain.user.repository;
 
 import com.bader.domain.user.model.User;
 
-public interface UserRepository {
-    User save(User user);
+import java.util.Optional;
 
+public interface UserRepository {
     User findById(String username);
+
+    Optional<User> createUser(User user);
 }

@@ -23,6 +23,11 @@ public class JPABasedCustomerRepository implements CustomerRepository {
     @Override
     public Optional<Customer> createCustomer(String firstName, String lastName, String associatedUserUsername) {
         try {
+            Optional<CustomerEntity> existingCustomer = jpaCustomerRepository.findByEmail(associatedUserUsername);
+            if (existingCustomer.isPresent()){
+                return Optional.empty();
+            }
+
             Optional<UserEntity> associatedUser = jpaUserRepository.findById(associatedUserUsername);
             if (associatedUser.isPresent()){
                 CustomerEntity newCustomer = new CustomerEntity(firstName, lastName);

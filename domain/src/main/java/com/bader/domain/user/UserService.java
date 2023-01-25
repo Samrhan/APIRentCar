@@ -6,9 +6,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface UserService {
-    void registerCustomer(String username, String password, String role, String firstName, String lastName);
+    boolean registerCustomer(String username, String password, String role, String firstName, String lastName);
 
-    void registerSeller(String username, String password, String role);
+    boolean registerSeller(String username, String password, String role);
 
     Optional<Customer> getCustomer(UUID id);
 

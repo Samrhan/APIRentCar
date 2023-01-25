@@ -7,6 +7,7 @@ import com.bader.infrastructure.persitence.user.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -19,8 +20,7 @@ public class JPABasedUserRepository implements UserRepository {
         this.jpaAuthorityRepository = jpaAuthorityRepository;
     }
 
-    @Override
-    public User save(User user) {
+    private User save(User user) {
         UserEntity userEntity = jpaUserRepository.save(new UserEntity(user.getUsername(), user.getPassword(), user.isEnabled()));
         if (user.getAuthorities() != null) {
             List<AuthorityEntity> authorities = user.getAuthorities().stream()
@@ -34,5 +34,15 @@ public class JPABasedUserRepository implements UserRepository {
     @Override
     public User findById(String username) {
         return jpaUserRepository.findById(username).map(UserEntity::toModel).orElse(null);
+    }
+
+    @Override
+    public Optional<User> createUser(User user) {
+        Optional<UserEntity> existingUser = jpaUserRepository.findById(user.getUsername());
+        if (existingUser.isPresent()){
+            return Optional.empty();
+        }
+
+        return Optional.of(this.save(user));
     }
 }

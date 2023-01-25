@@ -53,15 +53,15 @@ public class AuthController {
     @PostMapping("/register/customer")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Object> registerCustomer(@RequestBody @Valid RegisterCustomerRequest registerCustomerRequest) {
-        userService.registerCustomer(registerCustomerRequest.getUsername(), passwordEncoder.encode(registerCustomerRequest.getPassword()), SecurityConfiguration.CUSTOMER, registerCustomerRequest.getFirstName(), registerCustomerRequest.getLastName());
-        return ResponseEntity.ok().build();
+        boolean userWasAdded = userService.registerCustomer(registerCustomerRequest.getUsername(), passwordEncoder.encode(registerCustomerRequest.getPassword()), SecurityConfiguration.CUSTOMER, registerCustomerRequest.getFirstName(), registerCustomerRequest.getLastName());
+        return userWasAdded ? ResponseEntity.ok().build() : ResponseEntity.status(409).build();
     }
 
     @PostMapping("/register/seller")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Object> registerSeller(@RequestBody @Valid LoginRequest loginRequest) {
-        userService.registerSeller(loginRequest.getUsername(), passwordEncoder.encode(loginRequest.getPassword()), SecurityConfiguration.SELLER);
-        return ResponseEntity.ok().build();
+        boolean userWasAdded = userService.registerSeller(loginRequest.getUsername(), passwordEncoder.encode(loginRequest.getPassword()), SecurityConfiguration.SELLER);
+        return userWasAdded ? ResponseEntity.ok().build() : ResponseEntity.status(409).build();
     }
 
     @GetMapping("/customer/{id}")
