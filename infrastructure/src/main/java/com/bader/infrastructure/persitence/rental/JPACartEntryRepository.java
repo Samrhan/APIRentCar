@@ -20,4 +20,9 @@ public interface JPACartEntryRepository extends CrudRepository<CartEntryEntity, 
     @Transactional
     @Query("DELETE FROM CartEntryEntity cartEntry WHERE cartEntry.customer = :customer")
     void deleteAllByCustomer(@Param("customer") CustomerEntity customer);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM CartEntryEntity cartEntry WHERE cartEntry.id = :cartEntryId and cartEntry.customer = :customer")
+    void deleteByIdIfOwned(@Param("cartEntryId") UUID cartEntryId, @Param("customer") CustomerEntity customer);
 }

@@ -12,7 +12,7 @@ public interface RentalService {
 
     Optional<CartEntry> addCartEntry(String associatedUserUsername, UUID carId, Date startDate, Date endDate);
 
-    boolean deleteCartEntry(UUID cartEntryId);
+    boolean deleteCartEntry(String associatedUserUsername, UUID cartEntryId);
 
     List<Reservation> getFutureReservationsForCar(UUID carId);
 }

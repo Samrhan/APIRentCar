@@ -64,7 +64,16 @@ public class JPABasedCartEntryRepository implements CartEntryRepository {
     }
 
     @Override
-    public boolean deleteCartEntry(UUID cartEntryId) {
+    public boolean deleteCartEntry(String associatedUserUsername, UUID cartEntryId) {
+        Optional<CustomerEntity> customer = jpaCustomerRepository.findByEmail(associatedUserUsername);
+        if (customer.isPresent()) {
+            try {
+                jpaCartEntryRepository.deleteByIdIfOwned(cartEntryId, customer.get());
+                return true;
+            } catch (EmptyResultDataAccessException e) {
+                return false;
+            }
+        }
         return false;
     }
 }

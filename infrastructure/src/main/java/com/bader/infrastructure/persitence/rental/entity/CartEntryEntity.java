@@ -55,4 +55,24 @@ public class CartEntryEntity {
     public CartEntry toModel(){
         return new CartEntry(id, customer.toModel(), car.toModel(), startDate, endDate);
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public CustomerEntity getCustomer() {
+        return customer;
+    }
+
+    public CarEntity getCar() {
+        return car;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
 }

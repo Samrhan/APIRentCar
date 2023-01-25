@@ -40,8 +40,8 @@ public class RentalController {
 
     @DeleteMapping("/cart/{cartEntryId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> deleteCartEntry(@PathVariable("cartEntryId")UUID cartEntryId){
-        if (rentalService.deleteCartEntry(cartEntryId)) {
+    public ResponseEntity<Void> deleteCartEntry(@PathVariable("cartEntryId")UUID cartEntryId, Principal customer){
+        if (rentalService.deleteCartEntry(customer.getName(), cartEntryId)) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
