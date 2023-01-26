@@ -5,6 +5,7 @@ import com.bader.domain.catalog.model.Car;
 
 import java.util.Date;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class CartEntry {
 
@@ -40,5 +41,16 @@ public class CartEntry {
 
     public Date getEndDate() {
         return endDate;
+    }
+
+    public int getReservationDurationInDays(){
+        // Code from https://stackabuse.com/how-to-get-the-number-of-days-between-dates-in-java/
+        long dateBeforeInMs = startDate.getTime();
+        long dateAfterInMs = endDate.getTime();
+        long timeDiff = Math.abs(dateAfterInMs - dateBeforeInMs);
+        long daysDiff = TimeUnit.DAYS.convert(timeDiff, TimeUnit.MILLISECONDS);
+        daysDiff++; // Count 1 more day as the boundaries are inclusive (i.e, renting from Jan. 6 to Jan. 10 is five days and not just (10 - 6 = 4) days)
+
+        return (int) daysDiff;
     }
 }

@@ -4,6 +4,7 @@ import com.bader.domain.rental.RentalService;
 import com.bader.domain.rental.model.CartEntry;
 import com.bader.domain.rental.model.Reservation;
 import com.bader.ports.web.rentral.dto.request.CartEntryRequest;
+import com.bader.ports.web.rentral.dto.request.CartPaymentRequest;
 import com.bader.ports.web.rentral.dto.response.AnonymousReservationResponse;
 import com.bader.ports.web.rentral.dto.response.CartEntryResponse;
 import org.springframework.http.HttpStatus;
@@ -59,6 +60,14 @@ public class RentalController {
     @GetMapping("/car/{carId}/reservations")
     public List<AnonymousReservationResponse> getFutureReservationsForCar(@PathVariable("carId") UUID carId){
         return rentalService.getFutureReservationsForCar(carId).stream().map(this::toAnonymousReservationResponse).collect(Collectors.toList());
+    }
+
+    @PostMapping("/cart/pay")
+    public ResponseEntity<Void> payCart(@RequestBody @Valid CartPaymentRequest request, Principal customer){
+        if (rentalService.payCart(customer.getName(), request.getCardNumber(), request.getSecurityCode(), request.getExpirationDate(), request.getOwnerName())) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     private CartEntryResponse toCartEntryResponse(CartEntry cartEntry) {
