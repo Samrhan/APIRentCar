@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class RepositoryBasedRentalService implements RentalService {
 
@@ -43,14 +45,19 @@ public class RepositoryBasedRentalService implements RentalService {
         return Optional.empty();
     }
 
+    private boolean isCarAvailableBetween(UUID carId, Date startDate, Date endDate) {
+        List<Reservation> carReservations = this.reservationRepository.getReservationsBetweenForCar(carId, startDate, endDate);
+        return carReservations.size() == 0;
+    }
+
     @Override
     public boolean deleteCartEntry(String associatedUserUsername, UUID cartEntryId) {
         return this.cartEntryRepository.deleteCartEntry(associatedUserUsername, cartEntryId);
     }
 
     @Override
-    public List<Reservation> getFutureReservationsForCar(UUID carId) {
-        return this.reservationRepository.getFutureReservationsForCar(carId);
+    public List<Reservation> getFutureAndCurrentReservationsForCar(UUID carId) {
+        return this.reservationRepository.getFutureAndCurrentReservationsForCar(carId);
     }
 
     @Override
@@ -82,8 +89,23 @@ public class RepositoryBasedRentalService implements RentalService {
                 .intValue();
     }
 
-    private boolean isCarAvailableBetween(UUID carId, Date startDate, Date endDate) {
-        List<Reservation> carReservations = this.reservationRepository.getReservationsBetweenForCar(carId, startDate, endDate);
-        return carReservations.size() == 0;
+    @Override
+    public List<Reservation> getFutureReservationsForCustomer(String associatedUserUsername) {
+        return this.reservationRepository.getReservationsForCustomerAfter(associatedUserUsername, new Date());
+    }
+
+    @Override
+    public List<Reservation> getPastReservationsForCustomer(String associatedUserUsername) {
+        return this.reservationRepository.getReservationsForCustomerBefore(associatedUserUsername, new Date());
+    }
+
+    @Override
+    public List<Reservation> getAllReservationsForCustomer(String associatedUserUsername) {
+        return Stream
+                .concat(
+                        getPastReservationsForCustomer(associatedUserUsername).stream(),
+                        getFutureReservationsForCustomer(associatedUserUsername).stream()
+                )
+                .collect(Collectors.toList());
     }
 }

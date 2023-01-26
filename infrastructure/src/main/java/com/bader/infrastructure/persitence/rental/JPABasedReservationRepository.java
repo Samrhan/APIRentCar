@@ -3,17 +3,15 @@ package com.bader.infrastructure.persitence.rental;
 import com.bader.domain.rental.model.CartEntry;
 import com.bader.domain.rental.model.Reservation;
 import com.bader.domain.rental.repository.ReservationRepository;
-import com.bader.domain.user.model.Customer;
-import com.bader.infrastructure.persitence.catalog.JPABasedCatalogRepository;
 import com.bader.infrastructure.persitence.catalog.JPACatalogRepository;
 import com.bader.infrastructure.persitence.catalog.entity.CarEntity;
 import com.bader.infrastructure.persitence.rental.entity.ReservationEntity;
-import com.bader.infrastructure.persitence.user.JPABasedCustomerRepository;
 import com.bader.infrastructure.persitence.user.JPACustomerRepository;
 import com.bader.infrastructure.persitence.user.entity.CustomerEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class JPABasedReservationRepository implements ReservationRepository {
@@ -30,12 +28,24 @@ public class JPABasedReservationRepository implements ReservationRepository {
 
     @Override
     public List<Reservation> getReservationsBetweenForCar(UUID carId, Date startDate, Date endDate) {
-        return new ArrayList<>();
+        Optional<CarEntity> car = jpaCatalogRepository.findById(carId);
+        if (car.isEmpty()){
+            return new ArrayList<>();
+        }
+
+        Optional<List<ReservationEntity>> reservations = jpaReservationRepository.findAllForCarBetween(car.get(), startDate, endDate);
+        return unwrapReservationEntityListOptional(reservations);
     }
 
     @Override
-    public List<Reservation> getFutureReservationsForCar(UUID carId) {
-        return new ArrayList<>();
+    public List<Reservation> getFutureAndCurrentReservationsForCar(UUID carId) {
+        Optional<CarEntity> car = jpaCatalogRepository.findById(carId);
+        if (car.isEmpty()){
+            return new ArrayList<>();
+        }
+
+        Optional<List<ReservationEntity>> reservations = jpaReservationRepository.findAllForCarAfterAndCurrent(car.get(), new Date());
+        return unwrapReservationEntityListOptional(reservations);
     }
 
     @Override
@@ -62,5 +72,33 @@ public class JPABasedReservationRepository implements ReservationRepository {
             ReservationEntity reservation = new ReservationEntity(customer, car.get(), cartEntry.getStartDate(), cartEntry.getEndDate(), true);
             jpaReservationRepository.save(reservation);
         }
+    }
+
+    @Override
+    public List<Reservation> getReservationsForCustomerAfter(String associatedUserUsername, Date date) {
+        Optional<CustomerEntity> customer = jpaCustomerRepository.findByEmail(associatedUserUsername);
+        if (customer.isEmpty()){
+            return new ArrayList<>();
+        }
+
+        Optional<List<ReservationEntity>> reservations = jpaReservationRepository.findAllForCustomerAfter(customer.get(), date);
+        return unwrapReservationEntityListOptional(reservations);
+    }
+
+    @Override
+    public List<Reservation> getReservationsForCustomerBefore(String associatedUserUsername, Date date) {
+        Optional<CustomerEntity> customer = jpaCustomerRepository.findByEmail(associatedUserUsername);
+        if (customer.isEmpty()){
+            return new ArrayList<>();
+        }
+
+        Optional<List<ReservationEntity>> reservations = jpaReservationRepository.findAllForCustomerBefore(customer.get(), date);
+        return unwrapReservationEntityListOptional(reservations);
+    }
+
+    public List<Reservation> unwrapReservationEntityListOptional(Optional<List<ReservationEntity>> reservationEntitiesOptional){
+        return reservationEntitiesOptional.map(
+                reservationEntities -> reservationEntities.stream().map(ReservationEntity::toModel).collect(Collectors.toList())
+        ).orElseGet(ArrayList::new);
     }
 }

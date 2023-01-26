@@ -10,7 +10,11 @@ import java.util.UUID;
 public interface ReservationRepository {
     List<Reservation> getReservationsBetweenForCar(UUID carId, Date startDate, Date endDate);
 
-    List<Reservation> getFutureReservationsForCar(UUID carId);
+    List<Reservation> getFutureAndCurrentReservationsForCar(UUID carId);
 
     void convertCartToReservationsAfterPayment(List<CartEntry> cart);
+
+    List<Reservation> getReservationsForCustomerAfter(String associatedUserUsername, Date date);
+
+    List<Reservation> getReservationsForCustomerBefore(String associatedUserUsername, Date date);
 }
