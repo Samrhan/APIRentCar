@@ -58,15 +58,15 @@
                         <configuration>
                             <includes>
                                 <include>
-                                    <groupId>com.bader</groupId>
+                                    <groupId>com.ssa</groupId>
                                     <artifactId>domain</artifactId>
                                 </include>
                                 <include>
-                                    <groupId>com.bader</groupId>
+                                    <groupId>com.ssa</groupId>
                                     <artifactId>infrastructure</artifactId>
                                 </include>
                                 <include>
-                                    <groupId>com.bader</groupId>
+                                    <groupId>com.ssa</groupId>
                                     <artifactId>ports</artifactId>
                                 </include>
                             </includes>
