@@ -1,5 +1,6 @@
 package com.bader.domain.rental;
 
+import com.bader.domain.notification.NotificationService;
 import com.bader.domain.payment.PaymentService;
 import com.bader.domain.payment.model.CreditCard;
 import com.bader.domain.rental.model.CartEntry;
@@ -20,11 +21,13 @@ public class RepositoryBasedRentalService implements RentalService {
     private final CartEntryRepository cartEntryRepository;
     private final ReservationRepository reservationRepository;
     private final PaymentService paymentService;
+    private final NotificationService notificationService;
 
-    public RepositoryBasedRentalService(CartEntryRepository cartEntryRepository, ReservationRepository reservationRepository, PaymentService paymentService) {
+    public RepositoryBasedRentalService(CartEntryRepository cartEntryRepository, ReservationRepository reservationRepository, PaymentService paymentService, NotificationService notificationService) {
         this.cartEntryRepository = cartEntryRepository;
         this.reservationRepository = reservationRepository;
         this.paymentService = paymentService;
+        this.notificationService = notificationService;
     }
 
     @Override
@@ -71,6 +74,7 @@ public class RepositoryBasedRentalService implements RentalService {
         if (paymentService.attemptPayment(new CreditCard(cardNumber, securityCode, expirationDate, ownerName), cartTotalInCents)) {
             this.cartEntryRepository.deleteCart(associatedUserUsername);
             this.reservationRepository.convertCartToReservationsAfterPayment(cart);
+            this.notificationService.notifyCustomer(associatedUserUsername, cartTotalInCents);
             return true;
         }
         return false;
