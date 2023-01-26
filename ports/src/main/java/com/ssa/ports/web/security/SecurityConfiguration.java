@@ -81,7 +81,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .accessDeniedHandler((request, response, accessDeniedException) -> handlerExceptionResolver.resolveException(request, response, null, accessDeniedException))
                 .jwt()
                 .decoder(jwtDecoder())
-                .jwtAuthenticationConverter(new JwtAuthenticationConverter(new JwtAuthoritiesConverter("roles")));
+                .jwtAuthenticationConverter(new JwtAuthenticationConverter(new JwtAuthoritiesConverter("authorities")));
     }
 
     @Override

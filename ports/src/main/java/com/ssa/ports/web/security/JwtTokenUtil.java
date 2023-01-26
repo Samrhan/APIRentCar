@@ -73,12 +73,10 @@ public class JwtTokenUtil implements Serializable {
     //   compaction of the JWT to a URL-safe string
     private String doGenerateToken(Map<String, Object> claims, String subject) {
         Map<String, Object> headers = new HashMap<>();
-        Map<String, Object> testClaims = new HashMap<>();
         headers.put("typ", "JWT");
-        testClaims.put("roles", "admin");
         return Jwts
                 .builder()
-                .setClaims(testClaims)
+                .setClaims(claims)
                 .setSubject(subject)
                 .setHeader(headers)
                 .setIssuedAt(new Date(System.currentTimeMillis()))

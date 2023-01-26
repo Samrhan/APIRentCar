@@ -21,7 +21,7 @@ public class JwtAuthoritiesConverter implements Converter<Jwt, Collection<Grante
         return jwt
                 .getClaimAsStringList(this.roleClaim)
                 .stream()
-                .map(role -> String.format("ROLE_%s", role))
+                .map(role -> role.split(":")[1].split("\"")[1])
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
