@@ -1,6 +1,5 @@
 package com.bader.ports.web.rentral.dto.response;
 
-import com.bader.domain.catalog.model.Car;
 import com.bader.domain.rental.model.Reservation;
 import com.bader.ports.web.catalog.dto.response.CarResponse;
 

@@ -1,6 +1,5 @@
 package com.bader.domain.user.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class User {

@@ -1,7 +1,7 @@
 package com.bader.domain.rental.model;
 
-import com.bader.domain.user.model.Customer;
 import com.bader.domain.catalog.model.Car;
+import com.bader.domain.user.model.Customer;
 
 import java.util.Date;
 import java.util.UUID;

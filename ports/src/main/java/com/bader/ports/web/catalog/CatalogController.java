@@ -7,15 +7,14 @@ import com.bader.ports.web.catalog.dto.response.CarResponse;
 import com.bader.ports.web.security.SecurityConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import java.util.List;
 
 @RestController
 @RequestMapping("/catalog")

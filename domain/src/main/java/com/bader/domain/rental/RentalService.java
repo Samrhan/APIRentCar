@@ -3,7 +3,10 @@ package com.bader.domain.rental;
 import com.bader.domain.rental.model.CartEntry;
 import com.bader.domain.rental.model.Reservation;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface RentalService {
     List<CartEntry> getCart(String associatedUserUsername);
