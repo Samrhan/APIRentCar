@@ -3,11 +3,11 @@ package com.bader.domain.user.model;
 import java.util.UUID;
 
 public class Customer {
-    private UUID id;
-    private String firstName;
-    private String lastName;
+    private final UUID id;
+    private final String firstName;
+    private final String lastName;
 
-    private User associatedUser;
+    private final User associatedUser;
 
     public Customer(UUID id, String firstName, String lastName, User associatedUser) {
         this.id = id;

@@ -5,12 +5,12 @@ import java.util.UUID;
 
 public class Car {
 
-    private UUID id;
-    private String model;
-    private String brand;
-    private String color;
-    private Integer year;
-    private BigDecimal price;
+    private final UUID id;
+    private final String model;
+    private final String brand;
+    private final String color;
+    private final Integer year;
+    private final BigDecimal price;
 
     public Car(UUID id, String model, String brand, String color, Integer year, BigDecimal price) {
         this.id = id;

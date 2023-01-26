@@ -9,11 +9,11 @@ import java.util.concurrent.TimeUnit;
 
 public class CartEntry {
 
-    private UUID id;
-    private Customer customer;
-    private Car car;
-    private Date startDate;
-    private Date endDate;
+    private final UUID id;
+    private final Customer customer;
+    private final Car car;
+    private final Date startDate;
+    private final Date endDate;
 
     public CartEntry(UUID id, Customer customer, Car car, Date startDate, Date endDate) {
         this.id = id;
