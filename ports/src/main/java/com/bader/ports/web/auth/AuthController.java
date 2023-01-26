@@ -65,7 +65,7 @@ public class AuthController {
     }
 
     @GetMapping("/customer/{id}")
-    public ResponseEntity<CustomerDetailResponse> getCustomerDetails(@PathVariable("id") UUID id){
+    public ResponseEntity<CustomerDetailResponse> getCustomerDetails(@PathVariable("id") UUID id) {
         return ResponseEntity.of(
                 userService.getCustomer(id)
                         .map(this::toCustomerDetailResponse)
@@ -73,17 +73,17 @@ public class AuthController {
     }
 
     @GetMapping("/customer/search")
-    public ResponseEntity<CustomerIdResponse> findCustomerByEmail(@RequestParam String email){
+    public ResponseEntity<CustomerIdResponse> findCustomerByEmail(@RequestParam String email) {
         return ResponseEntity.of(
                 userService.getCustomerByEmail(email).map(this::toCustomerIdResponse)
         );
     }
 
-    private CustomerIdResponse toCustomerIdResponse(Customer customer){
+    private CustomerIdResponse toCustomerIdResponse(Customer customer) {
         return new CustomerIdResponse(customer);
     }
 
-    private CustomerDetailResponse toCustomerDetailResponse(Customer customer){
+    private CustomerDetailResponse toCustomerDetailResponse(Customer customer) {
         return new CustomerDetailResponse(customer);
     }
 }

@@ -11,10 +11,10 @@ public class CartEntryRequest {
 
     private final UUID carId;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private final Date startDate;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private final Date endDate;
 
     @JsonCreator

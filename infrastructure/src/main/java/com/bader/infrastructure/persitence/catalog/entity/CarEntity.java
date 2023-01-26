@@ -12,13 +12,13 @@ import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-@Entity(name="CarEntity")
+@Entity(name = "CarEntity")
 public class CarEntity {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Type(type="org.hibernate.type.UUIDCharType")
+    @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID id;
 
     @Column(name = "MODEL", nullable = false)
@@ -44,6 +44,7 @@ public class CarEntity {
         this.year = year;
         this.price = price;
     }
+
     protected CarEntity() {
     }
 

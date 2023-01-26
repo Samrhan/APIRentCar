@@ -28,9 +28,9 @@ public class JPABasedCartEntryRepository implements CartEntryRepository {
     @Override
     public List<CartEntry> getCart(String associatedUserUsername) {
         Optional<CustomerEntity> customer = jpaCustomerRepository.findByEmail(associatedUserUsername);
-        if (customer.isPresent()){
+        if (customer.isPresent()) {
             Optional<List<CartEntryEntity>> cart = jpaCartEntryRepository.findAllByCustomer(customer.get());
-            if (cart.isPresent()){
+            if (cart.isPresent()) {
                 return cart.get().stream().map(CartEntryEntity::toModel).collect(Collectors.toList());
             }
         }
@@ -41,7 +41,7 @@ public class JPABasedCartEntryRepository implements CartEntryRepository {
     public CartEntry addCartEntry(String associatedUserUsername, UUID carId, Date startDate, Date endDate) {
         Optional<CustomerEntity> customer = jpaCustomerRepository.findByEmail(associatedUserUsername);
         Optional<CarEntity> car = jpaCatalogRepository.findById(carId);
-        if (customer.isPresent() && car.isPresent()){
+        if (customer.isPresent() && car.isPresent()) {
             CartEntryEntity cartEntry = new CartEntryEntity(customer.get(), car.get(), startDate, endDate);
             jpaCartEntryRepository.save(cartEntry);
             return cartEntry.toModel();

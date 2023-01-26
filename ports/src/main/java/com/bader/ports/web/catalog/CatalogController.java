@@ -47,7 +47,7 @@ public class CatalogController {
     @DeleteMapping("/{id}")
     @RolesAllowed({SecurityConfiguration.SELLER, SecurityConfiguration.ADMIN})
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> deleteCar(@PathVariable("id") UUID id){
+    public ResponseEntity<Void> deleteCar(@PathVariable("id") UUID id) {
         // If the deletion succeeds, return 204 as there is now no content. Otherwise, return 404 since the entity doesn't exist
         if (this.catalogService.deleteCar(id)) {
             return ResponseEntity.noContent().build();

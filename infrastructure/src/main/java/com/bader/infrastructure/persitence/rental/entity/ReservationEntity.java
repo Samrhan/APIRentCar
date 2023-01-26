@@ -17,7 +17,7 @@ public class ReservationEntity {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Type(type="org.hibernate.type.UUIDCharType")
+    @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -58,7 +58,7 @@ public class ReservationEntity {
         this.paid = paid;
     }
 
-    public Reservation toModel(){
+    public Reservation toModel() {
         return new Reservation(id, customer.toModel(), car.toModel(), startDate, endDate, paid);
     }
 }

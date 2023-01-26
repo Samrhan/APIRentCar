@@ -29,7 +29,7 @@ public class JPABasedReservationRepository implements ReservationRepository {
     @Override
     public List<Reservation> getReservationsBetweenForCar(UUID carId, Date startDate, Date endDate) {
         Optional<CarEntity> car = jpaCatalogRepository.findById(carId);
-        if (car.isEmpty()){
+        if (car.isEmpty()) {
             return new ArrayList<>();
         }
 
@@ -40,7 +40,7 @@ public class JPABasedReservationRepository implements ReservationRepository {
     @Override
     public List<Reservation> getFutureAndCurrentReservationsForCar(UUID carId) {
         Optional<CarEntity> car = jpaCatalogRepository.findById(carId);
-        if (car.isEmpty()){
+        if (car.isEmpty()) {
             return new ArrayList<>();
         }
 
@@ -61,14 +61,14 @@ public class JPABasedReservationRepository implements ReservationRepository {
         }
         CustomerEntity customer = customerOptional.get();
 
-        for(CartEntry cartEntry : cart){
+        for (CartEntry cartEntry : cart) {
             convertCartEntryToPaidReservation(cartEntry, customer);
         }
     }
 
     private void convertCartEntryToPaidReservation(CartEntry cartEntry, CustomerEntity customer) {
         Optional<CarEntity> car = jpaCatalogRepository.findById(cartEntry.getCar().getId());
-        if (car.isPresent()){
+        if (car.isPresent()) {
             ReservationEntity reservation = new ReservationEntity(customer, car.get(), cartEntry.getStartDate(), cartEntry.getEndDate(), true);
             jpaReservationRepository.save(reservation);
         }
@@ -77,7 +77,7 @@ public class JPABasedReservationRepository implements ReservationRepository {
     @Override
     public List<Reservation> getReservationsForCustomerAfter(String associatedUserUsername, Date date) {
         Optional<CustomerEntity> customer = jpaCustomerRepository.findByEmail(associatedUserUsername);
-        if (customer.isEmpty()){
+        if (customer.isEmpty()) {
             return new ArrayList<>();
         }
 
@@ -88,7 +88,7 @@ public class JPABasedReservationRepository implements ReservationRepository {
     @Override
     public List<Reservation> getReservationsForCustomerBefore(String associatedUserUsername, Date date) {
         Optional<CustomerEntity> customer = jpaCustomerRepository.findByEmail(associatedUserUsername);
-        if (customer.isEmpty()){
+        if (customer.isEmpty()) {
             return new ArrayList<>();
         }
 
@@ -96,7 +96,7 @@ public class JPABasedReservationRepository implements ReservationRepository {
         return unwrapReservationEntityListOptional(reservations);
     }
 
-    public List<Reservation> unwrapReservationEntityListOptional(Optional<List<ReservationEntity>> reservationEntitiesOptional){
+    public List<Reservation> unwrapReservationEntityListOptional(Optional<List<ReservationEntity>> reservationEntitiesOptional) {
         return reservationEntitiesOptional.map(
                 reservationEntities -> reservationEntities.stream().map(ReservationEntity::toModel).collect(Collectors.toList())
         ).orElseGet(ArrayList::new);

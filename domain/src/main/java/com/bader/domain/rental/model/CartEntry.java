@@ -43,7 +43,7 @@ public class CartEntry {
         return endDate;
     }
 
-    public int getReservationDurationInDays(){
+    public int getReservationDurationInDays() {
         // Code from https://stackabuse.com/how-to-get-the-number-of-days-between-dates-in-java/
         long dateBeforeInMs = startDate.getTime();
         long dateAfterInMs = endDate.getTime();

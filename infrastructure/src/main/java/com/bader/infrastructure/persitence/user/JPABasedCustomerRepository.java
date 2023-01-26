@@ -24,12 +24,12 @@ public class JPABasedCustomerRepository implements CustomerRepository {
     public Optional<Customer> createCustomer(String firstName, String lastName, String associatedUserUsername) {
         try {
             Optional<CustomerEntity> existingCustomer = jpaCustomerRepository.findByEmail(associatedUserUsername);
-            if (existingCustomer.isPresent()){
+            if (existingCustomer.isPresent()) {
                 return Optional.empty();
             }
 
             Optional<UserEntity> associatedUser = jpaUserRepository.findById(associatedUserUsername);
-            if (associatedUser.isPresent()){
+            if (associatedUser.isPresent()) {
                 CustomerEntity newCustomer = new CustomerEntity(firstName, lastName);
                 newCustomer.setAssociatedUser(associatedUser.get());
 
@@ -37,7 +37,7 @@ public class JPABasedCustomerRepository implements CustomerRepository {
             } else {
                 return Optional.empty();
             }
-        } catch (DataAccessException e){
+        } catch (DataAccessException e) {
             return Optional.empty();
         }
     }

@@ -39,7 +39,7 @@ public class RepositoryBasedRentalService implements RentalService {
 
     @Override
     public Optional<CartEntry> addCartEntry(String associatedUserUsername, UUID carId, Date startDate, Date endDate) {
-        if(isCarAvailableBetween(carId, startDate, endDate)){
+        if (isCarAvailableBetween(carId, startDate, endDate)) {
             return Optional.ofNullable(this.cartEntryRepository.addCartEntry(associatedUserUsername, carId, startDate, endDate));
         }
         return Optional.empty();
@@ -63,12 +63,12 @@ public class RepositoryBasedRentalService implements RentalService {
     @Override
     public boolean payCart(String associatedUserUsername, String cardNumber, String securityCode, String expirationDate, String ownerName) {
         List<CartEntry> cart = this.cartEntryRepository.getCart(associatedUserUsername);
-        if (cart.size() < 1){
+        if (cart.size() < 1) {
             return false;
         }
 
         Integer cartTotalInCents = computeCartTotalInCents(cart);
-        if (paymentService.attemptPayment(new CreditCard(cardNumber, securityCode, expirationDate, ownerName), cartTotalInCents)){
+        if (paymentService.attemptPayment(new CreditCard(cardNumber, securityCode, expirationDate, ownerName), cartTotalInCents)) {
             this.cartEntryRepository.deleteCart(associatedUserUsername);
             this.reservationRepository.convertCartToReservationsAfterPayment(cart);
             return true;

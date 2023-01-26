@@ -56,20 +56,20 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                           <includes>
-                               <include>
-                                   <groupId>com.bader</groupId>
-                                   <artifactId>domain</artifactId>
-                               </include>
-                               <include>
-                                   <groupId>com.bader</groupId>
-                                   <artifactId>infrastructure</artifactId>
-                               </include>
-                               <include>
-                                   <groupId>com.bader</groupId>
-                                   <artifactId>ports</artifactId>
-                               </include>
-                           </includes>
+                            <includes>
+                                <include>
+                                    <groupId>com.bader</groupId>
+                                    <artifactId>domain</artifactId>
+                                </include>
+                                <include>
+                                    <groupId>com.bader</groupId>
+                                    <artifactId>infrastructure</artifactId>
+                                </include>
+                                <include>
+                                    <groupId>com.bader</groupId>
+                                    <artifactId>ports</artifactId>
+                                </include>
+                            </includes>
                         </configuration>
                     </execution>
                 </executions>

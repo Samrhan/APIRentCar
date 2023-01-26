@@ -39,7 +39,7 @@ public class JPABasedUserRepository implements UserRepository {
     @Override
     public Optional<User> createUser(User user) {
         Optional<UserEntity> existingUser = jpaUserRepository.findById(user.getUsername());
-        if (existingUser.isPresent()){
+        if (existingUser.isPresent()) {
             return Optional.empty();
         }
 

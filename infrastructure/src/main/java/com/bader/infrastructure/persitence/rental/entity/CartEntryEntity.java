@@ -16,7 +16,7 @@ public class CartEntryEntity {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Type(type="org.hibernate.type.UUIDCharType")
+    @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -52,7 +52,7 @@ public class CartEntryEntity {
         this.endDate = endDate;
     }
 
-    public CartEntry toModel(){
+    public CartEntry toModel() {
         return new CartEntry(id, customer.toModel(), car.toModel(), startDate, endDate);
     }
 

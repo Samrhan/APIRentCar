@@ -23,15 +23,15 @@ public class SearchController {
     }
 
     @GetMapping()
-    public List<CarResponse> searchCar(@RequestParam("model") Optional<String> model, @RequestParam("brand") Optional<String> brand, @RequestParam("color") Optional<String> color, @RequestParam("year") Optional<Integer> year, @RequestParam("price-min") Optional<BigDecimal> priceMin, @RequestParam("price-max") Optional<BigDecimal> priceMax){
+    public List<CarResponse> searchCar(@RequestParam("model") Optional<String> model, @RequestParam("brand") Optional<String> brand, @RequestParam("color") Optional<String> color, @RequestParam("year") Optional<Integer> year, @RequestParam("price-min") Optional<BigDecimal> priceMin, @RequestParam("price-max") Optional<BigDecimal> priceMax) {
         return searchService
                 .searchCar(
-                    model.orElse(null),
-                    brand.orElse(null),
-                    color.orElse(null),
-                    year.orElse(null),
-                    priceMin.orElse(null),
-                    priceMax.orElse(null)
+                        model.orElse(null),
+                        brand.orElse(null),
+                        color.orElse(null),
+                        year.orElse(null),
+                        priceMin.orElse(null),
+                        priceMax.orElse(null)
                 )
                 .stream()
                 .map(this::toCarResponse)

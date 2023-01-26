@@ -22,7 +22,7 @@ public class RepositoryBasedCatalogService implements CatalogService {
     }
 
     @Override
-    public Optional<Car> getCar(UUID id){
+    public Optional<Car> getCar(UUID id) {
         return this.catalogRepository.getCar(id);
     }
 

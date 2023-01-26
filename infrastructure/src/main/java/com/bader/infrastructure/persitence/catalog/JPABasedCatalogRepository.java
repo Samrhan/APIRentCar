@@ -45,7 +45,7 @@ public class JPABasedCatalogRepository implements CatalogRepository {
         try {
             jpaCatalogRepository.deleteById(id);
             return true;
-        } catch (EmptyResultDataAccessException e){
+        } catch (EmptyResultDataAccessException e) {
             // If the car does not exist, deleteById throws an EmptyResultDataAccessException
             // So we "cast" it to a simple false
             return false;

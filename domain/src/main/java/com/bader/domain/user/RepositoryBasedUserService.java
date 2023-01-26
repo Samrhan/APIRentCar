@@ -23,7 +23,7 @@ public class RepositoryBasedUserService implements UserService {
     public boolean registerCustomer(String username, String password, String role, String firstName, String lastName) {
         List<Authority> authorities = List.of(new Authority(role));
         Optional<User> user = userRepository.createUser(new User(username, password, true, authorities));
-        if (user.isEmpty()){
+        if (user.isEmpty()) {
             return false;
         }
 

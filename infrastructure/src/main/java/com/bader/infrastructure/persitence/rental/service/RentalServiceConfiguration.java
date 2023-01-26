@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RentalServiceConfiguration {
     @Bean
-    public RepositoryBasedRentalService repositoryBasedRentalService(CartEntryRepository cartEntryRepository, ReservationRepository reservationRepository, PaymentProvider paymentProvider){
+    public RepositoryBasedRentalService repositoryBasedRentalService(CartEntryRepository cartEntryRepository, ReservationRepository reservationRepository, PaymentProvider paymentProvider) {
         return new RepositoryBasedRentalService(cartEntryRepository, reservationRepository, new ProviderBasedPaymentService(paymentProvider));
     }
 }

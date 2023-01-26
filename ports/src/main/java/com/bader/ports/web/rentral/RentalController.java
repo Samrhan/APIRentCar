@@ -43,7 +43,7 @@ public class RentalController {
 
     @DeleteMapping("/cart/{cartEntryId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> deleteCartEntry(@PathVariable("cartEntryId")UUID cartEntryId, Principal customer){
+    public ResponseEntity<Void> deleteCartEntry(@PathVariable("cartEntryId") UUID cartEntryId, Principal customer) {
         if (rentalService.deleteCartEntry(customer.getName(), cartEntryId)) {
             return ResponseEntity.noContent().build();
         }
@@ -52,7 +52,7 @@ public class RentalController {
 
     @DeleteMapping("/cart")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> deleteCartEntry(Principal customer){
+    public ResponseEntity<Void> deleteCartEntry(Principal customer) {
         if (rentalService.deleteCart(customer.getName())) {
             return ResponseEntity.noContent().build();
         }
@@ -60,7 +60,7 @@ public class RentalController {
     }
 
     @PostMapping("/cart/pay")
-    public ResponseEntity<Void> payCart(@RequestBody @Valid CartPaymentRequest request, Principal customer){
+    public ResponseEntity<Void> payCart(@RequestBody @Valid CartPaymentRequest request, Principal customer) {
         if (rentalService.payCart(customer.getName(), request.getCardNumber(), request.getSecurityCode(), request.getExpirationDate(), request.getOwnerName())) {
             return ResponseEntity.ok().build();
         }
@@ -68,10 +68,10 @@ public class RentalController {
     }
 
     @GetMapping("/reservations")
-    public List<ReservationResponse> getCustomerReservations(@RequestParam("timeCriteria") Optional<String> timeCriteria, Principal customer){
-        if (timeCriteria.orElse("").equalsIgnoreCase("future")){
+    public List<ReservationResponse> getCustomerReservations(@RequestParam("timeCriteria") Optional<String> timeCriteria, Principal customer) {
+        if (timeCriteria.orElse("").equalsIgnoreCase("future")) {
             return rentalService.getFutureReservationsForCustomer(customer.getName()).stream().map(this::toReservationResponse).collect(Collectors.toList());
-        } else if (timeCriteria.orElse("").equalsIgnoreCase("past")){
+        } else if (timeCriteria.orElse("").equalsIgnoreCase("past")) {
             return rentalService.getPastReservationsForCustomer(customer.getName()).stream().map(this::toReservationResponse).collect(Collectors.toList());
         } else {
             return rentalService.getAllReservationsForCustomer(customer.getName()).stream().map(this::toReservationResponse).collect(Collectors.toList());
@@ -79,18 +79,19 @@ public class RentalController {
     }
 
     @GetMapping("/car/{carId}/reservations")
-    public List<AnonymousReservationResponse> getFutureAndCurrentReservationsForCar(@PathVariable("carId") UUID carId){
+    public List<AnonymousReservationResponse> getFutureAndCurrentReservationsForCar(@PathVariable("carId") UUID carId) {
         return rentalService.getFutureAndCurrentReservationsForCar(carId).stream().map(this::toAnonymousReservationResponse).collect(Collectors.toList());
     }
 
     private CartEntryResponse toCartEntryResponse(CartEntry cartEntry) {
         return new CartEntryResponse(cartEntry);
     }
-    private AnonymousReservationResponse toAnonymousReservationResponse(Reservation reservation){
+
+    private AnonymousReservationResponse toAnonymousReservationResponse(Reservation reservation) {
         return new AnonymousReservationResponse(reservation);
     }
 
-    private ReservationResponse toReservationResponse(Reservation reservation){
+    private ReservationResponse toReservationResponse(Reservation reservation) {
         return new ReservationResponse(reservation);
     }
 }

@@ -14,7 +14,7 @@ public class CustomerEntity {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Type(type="org.hibernate.type.UUIDCharType")
+    @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID id;
 
     @Column(name = "FIRST_NAME", nullable = false)
@@ -41,7 +41,7 @@ public class CustomerEntity {
         this.lastName = lastName;
     }
 
-    public Customer toModel(){
+    public Customer toModel() {
         return new Customer(id, firstName, lastName, associatedUser.toModel());
     }
 
