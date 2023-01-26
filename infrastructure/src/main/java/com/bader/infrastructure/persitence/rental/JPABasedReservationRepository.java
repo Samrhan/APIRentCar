@@ -38,17 +38,6 @@ public class JPABasedReservationRepository implements ReservationRepository {
     }
 
     @Override
-    public List<Reservation> getFutureAndCurrentReservationsForCar(UUID carId) {
-        Optional<CarEntity> car = jpaCatalogRepository.findById(carId);
-        if (car.isEmpty()) {
-            return new ArrayList<>();
-        }
-
-        Optional<List<ReservationEntity>> reservations = jpaReservationRepository.findAllForCarAfterAndCurrent(car.get(), new Date());
-        return unwrapReservationEntityListOptional(reservations);
-    }
-
-    @Override
     public void convertCartToReservationsAfterPayment(List<CartEntry> cart) {
         if (cart.size() < 1) {
             return;

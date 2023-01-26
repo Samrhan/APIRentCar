@@ -8,24 +8,33 @@ import com.bader.ports.web.rentral.dto.request.CartPaymentRequest;
 import com.bader.ports.web.rentral.dto.response.AnonymousReservationResponse;
 import com.bader.ports.web.rentral.dto.response.CartEntryResponse;
 import com.bader.ports.web.rentral.dto.response.ReservationResponse;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/rental")
 public class RentalController {
+    private final Date maxSearchDate;
+    private final Date minSearchDate;
+
     private final RentalService rentalService;
 
-    public RentalController(RentalService rentalService) {
+    public RentalController(RentalService rentalService) throws ParseException {
         this.rentalService = rentalService;
+
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        maxSearchDate = format.parse("9999-12-31");
+        minSearchDate = format.parse("0000-01-01");
     }
 
     @GetMapping("/cart")
@@ -79,8 +88,8 @@ public class RentalController {
     }
 
     @GetMapping("/car/{carId}/reservations")
-    public List<AnonymousReservationResponse> getFutureAndCurrentReservationsForCar(@PathVariable("carId") UUID carId) {
-        return rentalService.getFutureAndCurrentReservationsForCar(carId).stream().map(this::toAnonymousReservationResponse).collect(Collectors.toList());
+    public List<AnonymousReservationResponse> getReservationsBetweenForCar(@PathVariable("carId") UUID carId, @RequestParam("searchStartDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Optional<Date> searchStartDate, @RequestParam("searchEndDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Optional<Date> searchEndDate) {
+        return rentalService.getReservationsBetweenForCar(carId, searchStartDate.orElse(minSearchDate), searchEndDate.orElse(maxSearchDate)).stream().map(this::toAnonymousReservationResponse).collect(Collectors.toList());
     }
 
     private CartEntryResponse toCartEntryResponse(CartEntry cartEntry) {

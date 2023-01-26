@@ -56,8 +56,8 @@ public class RepositoryBasedRentalService implements RentalService {
     }
 
     @Override
-    public List<Reservation> getFutureAndCurrentReservationsForCar(UUID carId) {
-        return this.reservationRepository.getFutureAndCurrentReservationsForCar(carId);
+    public List<Reservation> getReservationsBetweenForCar(UUID carId, Date searchStartDate, Date searchEndDate) {
+        return this.reservationRepository.getReservationsBetweenForCar(carId, searchStartDate, searchEndDate);
     }
 
     @Override

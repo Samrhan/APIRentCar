@@ -19,10 +19,7 @@ public interface JPAReservationRepository extends CrudRepository<ReservationEnti
 
     @Query("SELECT reservation FROM ReservationEntity reservation WHERE reservation.customer = :customer AND reservation.startDate <= :searchEndDate")
     Optional<List<ReservationEntity>> findAllForCustomerBefore(@Param("customer") CustomerEntity customer, @Param("searchEndDate") Date searchEndDate);
-
-    @Query("SELECT reservation FROM ReservationEntity reservation WHERE reservation.car = :car AND reservation.endDate >= :searchStartDate")
-    Optional<List<ReservationEntity>> findAllForCarAfterAndCurrent(@Param("car") CarEntity car, @Param("searchStartDate") Date searchStartDate);
-
+    
     @Query("SELECT reservation FROM ReservationEntity reservation WHERE reservation.car = :car AND reservation.startDate <= :searchEndDate AND :searchStartDate <= reservation.endDate")
     Optional<List<ReservationEntity>> findAllForCarBetween(@Param("car") CarEntity carEntity, @Param("searchStartDate") Date searchStartDate, @Param("searchEndDate") Date searchEndDate);
 }

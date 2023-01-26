@@ -17,7 +17,7 @@ public interface RentalService {
 
     boolean deleteCartEntry(String associatedUserUsername, UUID cartEntryId);
 
-    List<Reservation> getFutureAndCurrentReservationsForCar(UUID carId);
+    List<Reservation> getReservationsBetweenForCar(UUID carId, Date searchStartDate, Date searchEndDate);
 
     boolean payCart(String associatedUserUsername, String cardNumber, String securityCode, String expirationDate, String ownerName);
 
