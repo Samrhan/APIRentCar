@@ -26,10 +26,15 @@ import java.io.IOException;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     public static final String ADMIN = "ADMIN";
+    public static final String PRE_AUTHORIZE_ADMIN = "hasAuthority('" + SecurityConfiguration.ADMIN + "')";
+
 
     public static final String CUSTOMER = "CUSTOMER";
+    public static final String PRE_AUTHORIZE_CUSTOMER = "hasAuthority('" + SecurityConfiguration.CUSTOMER + "')";
+
 
     public static final String SELLER = "SELLER";
+    public static final String PRE_AUTHORIZE_SELLER = "hasAuthority('" + SecurityConfiguration.SELLER + "')";
 
     private final SecretKey key;
     private final HandlerExceptionResolver handlerExceptionResolver;

@@ -11,6 +11,7 @@ import com.ssa.ports.web.security.SecurityConfiguration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.UUID;
+
+import static com.ssa.ports.web.security.SecurityConfiguration.PRE_AUTHORIZE_SELLER;
 
 @RestController
 @RequestMapping("/iam")
@@ -59,12 +62,14 @@ public class IAMController {
 
     @PostMapping("/register/seller")
     @ResponseStatus(HttpStatus.CREATED)
+    // @PreAuthorize(PRE_AUTHORIZE_ADMIN) // Should be reserved to admins, but isn't to make testing the project easier
     public ResponseEntity<Object> registerSeller(@RequestBody @Valid LoginRequest loginRequest) {
         boolean userWasAdded = IAMService.registerSeller(loginRequest.getUsername(), passwordEncoder.encode(loginRequest.getPassword()), SecurityConfiguration.SELLER);
         return userWasAdded ? ResponseEntity.ok().build() : ResponseEntity.status(409).build();
     }
 
     @GetMapping("/customer/{id}")
+    @PreAuthorize(PRE_AUTHORIZE_SELLER)
     public ResponseEntity<CustomerDetailResponse> getCustomerDetails(@PathVariable("id") UUID id) {
         return ResponseEntity.of(
                 IAMService.getCustomer(id)
@@ -73,6 +78,7 @@ public class IAMController {
     }
 
     @GetMapping("/customer/search")
+    @PreAuthorize(PRE_AUTHORIZE_SELLER)
     public ResponseEntity<CustomerIdResponse> findCustomerByEmail(@RequestParam String email) {
         return ResponseEntity.of(
                 IAMService.getCustomerByEmail(email).map(this::toCustomerIdResponse)
