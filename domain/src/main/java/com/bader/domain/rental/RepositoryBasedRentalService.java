@@ -120,4 +120,24 @@ public class RepositoryBasedRentalService implements RentalService {
         }
         return Optional.empty();
     }
+
+    @Override
+    public void payReservationOnSite(UUID reservationId) {
+        Optional<Reservation> reservationOptional = this.reservationRepository.payReservation(reservationId);
+        if (reservationOptional.isEmpty()) {
+            return;
+        }
+
+        Integer cartTotalInCents = computeReservationPriceInCents(reservationOptional.get());
+        this.notificationService.notifyCustomer(reservationOptional.get().getCustomer().getAssociatedUser().getUsername(), cartTotalInCents);
+    }
+
+    private Integer computeReservationPriceInCents(Reservation reservation) {
+        int reservationNumberOfDays = reservation.getReservationDurationInDays();
+        return reservation.getCar()
+                .getPrice()
+                .multiply(new BigDecimal(reservationNumberOfDays))
+                .multiply(new BigDecimal(100))
+                .intValue();
+    }
 }

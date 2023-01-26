@@ -104,4 +104,16 @@ public class JPABasedReservationRepository implements ReservationRepository {
         }
         return null;
     }
+
+    @Override
+    public Optional<Reservation> payReservation(UUID reservationId) {
+        Optional<ReservationEntity> reservationEntityOptional = this.jpaReservationRepository.findById(reservationId);
+        if (reservationEntityOptional.isPresent()) {
+            ReservationEntity reservation = reservationEntityOptional.get();
+            reservation.setPaid(true);
+            this.jpaReservationRepository.save(reservation);
+            return reservationEntityOptional.map(ReservationEntity::toModel);
+        }
+        return Optional.empty();
+    }
 }

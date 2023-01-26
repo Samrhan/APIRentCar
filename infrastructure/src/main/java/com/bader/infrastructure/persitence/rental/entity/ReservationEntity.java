@@ -61,4 +61,8 @@ public class ReservationEntity {
     public Reservation toModel() {
         return new Reservation(id, customer.toModel(), car.toModel(), startDate, endDate, paid);
     }
+
+    public void setPaid(Boolean paid) {
+        this.paid = paid;
+    }
 }

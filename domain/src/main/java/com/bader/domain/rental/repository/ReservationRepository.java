@@ -5,6 +5,7 @@ import com.bader.domain.rental.model.Reservation;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface ReservationRepository {
@@ -17,4 +18,6 @@ public interface ReservationRepository {
     List<Reservation> getReservationsForCustomerBefore(String associatedUserUsername, Date date);
 
     Reservation addReservation(UUID customerId, UUID carId, Date startDate, Date endDate, Boolean paid);
+
+    Optional<Reservation> payReservation(UUID reservationId);
 }

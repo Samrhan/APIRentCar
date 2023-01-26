@@ -100,6 +100,12 @@ public class RentalController {
         return ResponseEntity.status(409).build();
     }
 
+    @PutMapping("/reservations/{reservationId}/pay")
+    @ResponseStatus(HttpStatus.OK)
+    public void payReservationOnSite(@PathVariable UUID reservationId, Principal agent) {
+        rentalService.payReservationOnSite(reservationId);
+    }
+
     @GetMapping("/car/{carId}/reservations")
     public List<AnonymousReservationResponse> getReservationsBetweenForCar(@PathVariable("carId") UUID carId, @RequestParam("searchStartDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Optional<Date> searchStartDate, @RequestParam("searchEndDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Optional<Date> searchEndDate) {
         return rentalService.getReservationsBetweenForCar(carId, searchStartDate.orElse(minSearchDate), searchEndDate.orElse(maxSearchDate)).stream().map(this::toAnonymousReservationResponse).collect(Collectors.toList());
