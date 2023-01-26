@@ -1,4 +1,4 @@
-package com.bader.domain.payment.provider;
+package com.bader.domain.payment.ports;
 
 import com.bader.domain.payment.model.CreditCard;
 

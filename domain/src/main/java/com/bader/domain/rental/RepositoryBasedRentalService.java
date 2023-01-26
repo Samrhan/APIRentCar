@@ -5,8 +5,9 @@ import com.bader.domain.payment.PaymentService;
 import com.bader.domain.payment.model.CreditCard;
 import com.bader.domain.rental.model.CartEntry;
 import com.bader.domain.rental.model.Reservation;
-import com.bader.domain.rental.repository.CartEntryRepository;
-import com.bader.domain.rental.repository.ReservationRepository;
+import com.bader.domain.rental.ports.CartEntryRepository;
+import com.bader.domain.rental.ports.ReservationPreparationSDK;
+import com.bader.domain.rental.ports.ReservationRepository;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -23,11 +24,14 @@ public class RepositoryBasedRentalService implements RentalService {
     private final PaymentService paymentService;
     private final NotificationService notificationService;
 
-    public RepositoryBasedRentalService(CartEntryRepository cartEntryRepository, ReservationRepository reservationRepository, PaymentService paymentService, NotificationService notificationService) {
+    private final ReservationPreparationSDK reservationPreparationSDK;
+
+    public RepositoryBasedRentalService(CartEntryRepository cartEntryRepository, ReservationRepository reservationRepository, PaymentService paymentService, NotificationService notificationService, ReservationPreparationSDK reservationPreparationSDK) {
         this.cartEntryRepository = cartEntryRepository;
         this.reservationRepository = reservationRepository;
         this.paymentService = paymentService;
         this.notificationService = notificationService;
+        this.reservationPreparationSDK = reservationPreparationSDK;
     }
 
     @Override
@@ -73,7 +77,10 @@ public class RepositoryBasedRentalService implements RentalService {
         Integer cartTotalInCents = computeCartTotalInCents(cart);
         if (paymentService.attemptPayment(new CreditCard(cardNumber, securityCode, expirationDate, ownerName), cartTotalInCents)) {
             this.cartEntryRepository.deleteCart(associatedUserUsername);
-            this.reservationRepository.convertCartToReservationsAfterPayment(cart);
+            List<Reservation> reservations = this.reservationRepository.convertCartToReservationsAfterPayment(cart);
+            for (Reservation reservation : reservations) {
+                this.reservationPreparationSDK.prepareReservation(reservation);
+            }
             this.notificationService.notifyCustomer(associatedUserUsername, cartTotalInCents);
             return true;
         }
@@ -129,6 +136,7 @@ public class RepositoryBasedRentalService implements RentalService {
         }
 
         Integer cartTotalInCents = computeReservationPriceInCents(reservationOptional.get());
+        this.reservationPreparationSDK.prepareReservation(reservationOptional.get());
         this.notificationService.notifyCustomer(reservationOptional.get().getCustomer().getAssociatedUser().getUsername(), cartTotalInCents);
     }
 

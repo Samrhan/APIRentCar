@@ -2,7 +2,7 @@ package com.bader.infrastructure.persitence.rental;
 
 import com.bader.domain.rental.model.CartEntry;
 import com.bader.domain.rental.model.Reservation;
-import com.bader.domain.rental.repository.ReservationRepository;
+import com.bader.domain.rental.ports.ReservationRepository;
 import com.bader.infrastructure.persitence.IAM.JPACustomerRepository;
 import com.bader.infrastructure.persitence.IAM.entity.CustomerEntity;
 import com.bader.infrastructure.persitence.catalog.JPACatalogRepository;
@@ -38,29 +38,33 @@ public class JPABasedReservationRepository implements ReservationRepository {
     }
 
     @Override
-    public void convertCartToReservationsAfterPayment(List<CartEntry> cart) {
+    public List<Reservation> convertCartToReservationsAfterPayment(List<CartEntry> cart) {
         if (cart.size() < 1) {
-            return;
+            return new ArrayList<>();
         }
 
         // Avoid fetching the customer N times when we know that it's always the same one
         Optional<CustomerEntity> customerOptional = jpaCustomerRepository.findById(cart.get(0).getCustomer().getId());
         if (customerOptional.isEmpty()) {
-            return;
+            return new ArrayList<>();
         }
         CustomerEntity customer = customerOptional.get();
 
+        ArrayList<Reservation> reservations = new ArrayList<>();
         for (CartEntry cartEntry : cart) {
-            convertCartEntryToPaidReservation(cartEntry, customer);
+            reservations.add(convertCartEntryToPaidReservation(cartEntry, customer));
         }
+        return reservations;
     }
 
-    private void convertCartEntryToPaidReservation(CartEntry cartEntry, CustomerEntity customer) {
+    private Reservation convertCartEntryToPaidReservation(CartEntry cartEntry, CustomerEntity customer) {
         Optional<CarEntity> car = jpaCatalogRepository.findById(cartEntry.getCar().getId());
         if (car.isPresent()) {
             ReservationEntity reservation = new ReservationEntity(customer, car.get(), cartEntry.getStartDate(), cartEntry.getEndDate(), true);
             jpaReservationRepository.save(reservation);
+            return reservation.toModel();
         }
+        return null;
     }
 
     @Override

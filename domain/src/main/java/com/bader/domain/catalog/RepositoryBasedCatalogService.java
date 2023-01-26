@@ -1,7 +1,7 @@
 package com.bader.domain.catalog;
 
 import com.bader.domain.catalog.model.Car;
-import com.bader.domain.catalog.repository.CatalogRepository;
+import com.bader.domain.catalog.ports.CatalogRepository;
 
 import java.math.BigDecimal;
 import java.util.List;

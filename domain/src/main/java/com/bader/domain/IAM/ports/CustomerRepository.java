@@ -1,4 +1,4 @@
-package com.bader.domain.IAM.repository;
+package com.bader.domain.IAM.ports;
 
 import com.bader.domain.IAM.model.Customer;
 

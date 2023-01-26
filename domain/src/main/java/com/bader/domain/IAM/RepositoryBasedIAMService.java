@@ -3,8 +3,8 @@ package com.bader.domain.IAM;
 import com.bader.domain.IAM.model.Authority;
 import com.bader.domain.IAM.model.Customer;
 import com.bader.domain.IAM.model.User;
-import com.bader.domain.IAM.repository.CustomerRepository;
-import com.bader.domain.IAM.repository.UserRepository;
+import com.bader.domain.IAM.ports.CustomerRepository;
+import com.bader.domain.IAM.ports.UserRepository;
 
 import java.util.List;
 import java.util.Optional;

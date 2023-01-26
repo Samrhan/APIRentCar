@@ -1,4 +1,4 @@
-package com.bader.domain.rental.repository;
+package com.bader.domain.rental.ports;
 
 import com.bader.domain.rental.model.CartEntry;
 

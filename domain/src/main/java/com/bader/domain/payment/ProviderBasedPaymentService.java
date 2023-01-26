@@ -1,7 +1,7 @@
 package com.bader.domain.payment;
 
 import com.bader.domain.payment.model.CreditCard;
-import com.bader.domain.payment.provider.PaymentProvider;
+import com.bader.domain.payment.ports.PaymentProvider;
 
 public class ProviderBasedPaymentService implements PaymentService {
     private final PaymentProvider paymentProvider;

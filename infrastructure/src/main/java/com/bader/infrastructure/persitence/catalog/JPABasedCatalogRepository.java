@@ -1,7 +1,7 @@
 package com.bader.infrastructure.persitence.catalog;
 
 import com.bader.domain.catalog.model.Car;
-import com.bader.domain.catalog.repository.CatalogRepository;
+import com.bader.domain.catalog.ports.CatalogRepository;
 import com.bader.infrastructure.persitence.catalog.entity.CarEntity;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;

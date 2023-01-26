@@ -1,7 +1,7 @@
 package com.bader.infrastructure.persitence.catalog.service;
 
 import com.bader.domain.catalog.RepositoryBasedCatalogService;
-import com.bader.domain.catalog.repository.CatalogRepository;
+import com.bader.domain.catalog.ports.CatalogRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -2,7 +2,7 @@ package com.bader.infrastructure.provider.payment.service;
 
 import com.bader.domain.payment.PaymentService;
 import com.bader.domain.payment.ProviderBasedPaymentService;
-import com.bader.domain.payment.provider.PaymentProvider;
+import com.bader.domain.payment.ports.PaymentProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

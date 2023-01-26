@@ -1,6 +1,6 @@
 package com.bader.domain.notification;
 
-import com.bader.domain.notification.provider.EmailProvider;
+import com.bader.domain.notification.ports.EmailProvider;
 
 public class EmailProviderBasedNotificationService implements NotificationService {
     private final EmailProvider emailProvider;

@@ -1,8 +1,8 @@
 package com.bader.infrastructure.persitence.IAM.service;
 
 import com.bader.domain.IAM.RepositoryBasedIAMService;
-import com.bader.domain.IAM.repository.CustomerRepository;
-import com.bader.domain.IAM.repository.UserRepository;
+import com.bader.domain.IAM.ports.CustomerRepository;
+import com.bader.domain.IAM.ports.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

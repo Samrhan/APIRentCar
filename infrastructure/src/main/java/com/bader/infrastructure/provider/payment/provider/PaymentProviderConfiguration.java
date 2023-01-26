@@ -1,6 +1,6 @@
 package com.bader.infrastructure.provider.payment.provider;
 
-import com.bader.domain.payment.provider.PaymentProvider;
+import com.bader.domain.payment.ports.PaymentProvider;
 import com.bader.infrastructure.provider.payment.PaypalBasedPaymentProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

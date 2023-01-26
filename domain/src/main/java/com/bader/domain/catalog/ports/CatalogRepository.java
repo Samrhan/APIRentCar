@@ -1,4 +1,4 @@
-package com.bader.domain.catalog.repository;
+package com.bader.domain.catalog.ports;
 
 import com.bader.domain.catalog.model.Car;
 

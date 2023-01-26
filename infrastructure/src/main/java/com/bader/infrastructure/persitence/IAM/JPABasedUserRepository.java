@@ -1,7 +1,7 @@
 package com.bader.infrastructure.persitence.IAM;
 
 import com.bader.domain.IAM.model.User;
-import com.bader.domain.IAM.repository.UserRepository;
+import com.bader.domain.IAM.ports.UserRepository;
 import com.bader.infrastructure.persitence.IAM.entity.AuthorityEntity;
 import com.bader.infrastructure.persitence.IAM.entity.UserEntity;
 import org.springframework.stereotype.Repository;

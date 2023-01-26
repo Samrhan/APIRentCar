@@ -1,7 +1,7 @@
 package com.bader.infrastructure.persitence.IAM;
 
 import com.bader.domain.IAM.model.Customer;
-import com.bader.domain.IAM.repository.CustomerRepository;
+import com.bader.domain.IAM.ports.CustomerRepository;
 import com.bader.infrastructure.persitence.IAM.entity.CustomerEntity;
 import com.bader.infrastructure.persitence.IAM.entity.UserEntity;
 import org.springframework.dao.DataAccessException;

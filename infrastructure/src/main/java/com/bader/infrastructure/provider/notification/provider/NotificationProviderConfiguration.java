@@ -1,6 +1,6 @@
 package com.bader.infrastructure.provider.notification.provider;
 
-import com.bader.domain.notification.provider.EmailProvider;
+import com.bader.domain.notification.ports.EmailProvider;
 import com.bader.infrastructure.provider.notification.MailgunBasedEmailProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

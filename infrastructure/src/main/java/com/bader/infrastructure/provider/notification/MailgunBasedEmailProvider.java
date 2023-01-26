@@ -1,6 +1,6 @@
 package com.bader.infrastructure.provider.notification;
 
-import com.bader.domain.notification.provider.EmailProvider;
+import com.bader.domain.notification.ports.EmailProvider;
 
 /**
  * An implementation of EmailProvider based on Mailgun, a company that provides an API to easily send emails : https://www.mailgun.com/
