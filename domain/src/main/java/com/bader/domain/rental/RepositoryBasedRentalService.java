@@ -112,4 +112,12 @@ public class RepositoryBasedRentalService implements RentalService {
                 )
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Optional<Reservation> addReservation(UUID customerId, UUID carId, Date startDate, Date endDate, Boolean paid) {
+        if (isCarAvailableBetween(carId, startDate, endDate)) {
+            return Optional.ofNullable(this.reservationRepository.addReservation(customerId, carId, startDate, endDate, paid));
+        }
+        return Optional.empty();
+    }
 }

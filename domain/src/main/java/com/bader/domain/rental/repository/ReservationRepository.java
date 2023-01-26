@@ -15,4 +15,6 @@ public interface ReservationRepository {
     List<Reservation> getReservationsForCustomerAfter(String associatedUserUsername, Date date);
 
     List<Reservation> getReservationsForCustomerBefore(String associatedUserUsername, Date date);
+
+    Reservation addReservation(UUID customerId, UUID carId, Date startDate, Date endDate, Boolean paid);
 }

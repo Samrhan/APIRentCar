@@ -5,6 +5,7 @@ import com.bader.domain.rental.model.CartEntry;
 import com.bader.domain.rental.model.Reservation;
 import com.bader.ports.web.rentral.dto.request.CartEntryRequest;
 import com.bader.ports.web.rentral.dto.request.CartPaymentRequest;
+import com.bader.ports.web.rentral.dto.request.ReservationRequest;
 import com.bader.ports.web.rentral.dto.response.AnonymousReservationResponse;
 import com.bader.ports.web.rentral.dto.response.CartEntryResponse;
 import com.bader.ports.web.rentral.dto.response.ReservationResponse;
@@ -87,6 +88,16 @@ public class RentalController {
         } else {
             return rentalService.getAllReservationsForCustomer(customer.getName()).stream().map(this::toReservationResponse).collect(Collectors.toList());
         }
+    }
+
+    @PostMapping("/reservations")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<ReservationResponse> addReservation(@RequestBody @Valid ReservationRequest request, Principal agent) {
+        Optional<ReservationResponse> reservationResponse = rentalService.addReservation(request.getCustomerId(), request.getCarId(), request.getStartDate(), request.getEndDate(), request.getPaid()).map(this::toReservationResponse);
+        if (reservationResponse.isPresent()) {
+            return ResponseEntity.of(reservationResponse);
+        }
+        return ResponseEntity.status(409).build();
     }
 
     @GetMapping("/car/{carId}/reservations")

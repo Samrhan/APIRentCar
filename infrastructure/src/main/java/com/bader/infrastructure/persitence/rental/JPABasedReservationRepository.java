@@ -90,4 +90,18 @@ public class JPABasedReservationRepository implements ReservationRepository {
                 reservationEntities -> reservationEntities.stream().map(ReservationEntity::toModel).collect(Collectors.toList())
         ).orElseGet(ArrayList::new);
     }
+
+    @Override
+    public Reservation addReservation(UUID customerId, UUID carId, Date startDate, Date endDate, Boolean paid) {
+        Optional<CustomerEntity> customerEntityOptional = this.jpaCustomerRepository.findById(customerId);
+        Optional<CarEntity> carEntityOptional = this.jpaCatalogRepository.findById(carId);
+        if (customerEntityOptional.isPresent() && carEntityOptional.isPresent()) {
+            CustomerEntity customer = customerEntityOptional.get();
+            CarEntity car = carEntityOptional.get();
+            ReservationEntity reservation = new ReservationEntity(customer, car, startDate, endDate, paid);
+            jpaReservationRepository.save(reservation);
+            return reservation.toModel();
+        }
+        return null;
+    }
 }

@@ -26,4 +26,6 @@ public interface RentalService {
     List<Reservation> getPastReservationsForCustomer(String associatedUserUsername);
 
     List<Reservation> getAllReservationsForCustomer(String associatedUserUsername);
+
+    Optional<Reservation> addReservation(UUID customerId, UUID carId, Date startDate, Date endDate, Boolean paid);
 }
