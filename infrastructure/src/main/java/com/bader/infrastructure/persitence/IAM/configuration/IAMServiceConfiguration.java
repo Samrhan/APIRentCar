@@ -1,4 +1,4 @@
-package com.bader.infrastructure.persitence.IAM.service;
+package com.bader.infrastructure.persitence.IAM.configuration;
 
 import com.bader.domain.IAM.RepositoryBasedIAMService;
 import com.bader.domain.IAM.ports.CustomerRepository;

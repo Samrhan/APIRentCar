@@ -1,4 +1,4 @@
-package com.bader.infrastructure.persitence.rental.service;
+package com.bader.infrastructure.persitence.rental.configuration;
 
 import com.bader.domain.notification.NotificationService;
 import com.bader.domain.payment.PaymentService;

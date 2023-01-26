@@ -1,4 +1,4 @@
-package com.bader.infrastructure.persitence.search.service;
+package com.bader.infrastructure.persitence.search.configuration;
 
 import com.bader.domain.catalog.ports.CatalogRepository;
 import com.bader.domain.search.RepositoryBasedSearchService;

@@ -1,4 +1,4 @@
-package com.bader.infrastructure.provider.payment.provider;
+package com.bader.infrastructure.provider.payment.configuration;
 
 import com.bader.domain.payment.ports.PaymentProvider;
 import com.bader.infrastructure.provider.payment.PaypalBasedPaymentProvider;

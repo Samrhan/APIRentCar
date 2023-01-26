@@ -1,4 +1,4 @@
-package com.bader.infrastructure.provider.notification.service;
+package com.bader.infrastructure.provider.notification.configuration;
 
 import com.bader.domain.notification.EmailProviderBasedNotificationService;
 import com.bader.domain.notification.ports.EmailProvider;

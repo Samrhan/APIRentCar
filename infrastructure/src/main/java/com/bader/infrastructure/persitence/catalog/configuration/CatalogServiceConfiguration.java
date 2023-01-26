@@ -1,4 +1,4 @@
-package com.bader.infrastructure.persitence.catalog.service;
+package com.bader.infrastructure.persitence.catalog.configuration;
 
 import com.bader.domain.catalog.RepositoryBasedCatalogService;
 import com.bader.domain.catalog.ports.CatalogRepository;

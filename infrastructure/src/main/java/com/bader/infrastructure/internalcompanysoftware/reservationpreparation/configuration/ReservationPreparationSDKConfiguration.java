@@ -1,4 +1,4 @@
-package com.bader.infrastructure.internalcompanysoftware.reservationpreparation.service;
+package com.bader.infrastructure.internalcompanysoftware.reservationpreparation.configuration;
 
 import com.bader.domain.rental.ports.ReservationPreparationSDK;
 import com.bader.infrastructure.internalcompanysoftware.reservationpreparation.APIBasedReservationPreparationSDK;
