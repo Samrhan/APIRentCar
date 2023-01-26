@@ -1,9 +1,9 @@
-package com.bader.infrastructure.persitence.user;
+package com.bader.infrastructure.persitence.IAM;
 
-import com.bader.domain.user.model.Customer;
-import com.bader.domain.user.repository.CustomerRepository;
-import com.bader.infrastructure.persitence.user.entity.CustomerEntity;
-import com.bader.infrastructure.persitence.user.entity.UserEntity;
+import com.bader.domain.IAM.model.Customer;
+import com.bader.domain.IAM.repository.CustomerRepository;
+import com.bader.infrastructure.persitence.IAM.entity.CustomerEntity;
+import com.bader.infrastructure.persitence.IAM.entity.UserEntity;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 

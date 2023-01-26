@@ -2,11 +2,11 @@ package com.bader.infrastructure.persitence.rental;
 
 import com.bader.domain.rental.model.CartEntry;
 import com.bader.domain.rental.repository.CartEntryRepository;
+import com.bader.infrastructure.persitence.IAM.JPACustomerRepository;
+import com.bader.infrastructure.persitence.IAM.entity.CustomerEntity;
 import com.bader.infrastructure.persitence.catalog.JPACatalogRepository;
 import com.bader.infrastructure.persitence.catalog.entity.CarEntity;
 import com.bader.infrastructure.persitence.rental.entity.CartEntryEntity;
-import com.bader.infrastructure.persitence.user.JPACustomerRepository;
-import com.bader.infrastructure.persitence.user.entity.CustomerEntity;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 

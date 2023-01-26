@@ -1,9 +1,9 @@
-package com.bader.infrastructure.persitence.user;
+package com.bader.infrastructure.persitence.IAM;
 
-import com.bader.domain.user.model.User;
-import com.bader.domain.user.repository.UserRepository;
-import com.bader.infrastructure.persitence.user.entity.AuthorityEntity;
-import com.bader.infrastructure.persitence.user.entity.UserEntity;
+import com.bader.domain.IAM.model.User;
+import com.bader.domain.IAM.repository.UserRepository;
+import com.bader.infrastructure.persitence.IAM.entity.AuthorityEntity;
+import com.bader.infrastructure.persitence.IAM.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

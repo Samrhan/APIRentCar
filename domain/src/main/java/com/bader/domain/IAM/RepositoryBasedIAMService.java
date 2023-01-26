@@ -1,20 +1,20 @@
-package com.bader.domain.user;
+package com.bader.domain.IAM;
 
-import com.bader.domain.user.model.Authority;
-import com.bader.domain.user.model.Customer;
-import com.bader.domain.user.model.User;
-import com.bader.domain.user.repository.CustomerRepository;
-import com.bader.domain.user.repository.UserRepository;
+import com.bader.domain.IAM.model.Authority;
+import com.bader.domain.IAM.model.Customer;
+import com.bader.domain.IAM.model.User;
+import com.bader.domain.IAM.repository.CustomerRepository;
+import com.bader.domain.IAM.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class RepositoryBasedUserService implements UserService {
+public class RepositoryBasedIAMService implements IAMService {
     private final UserRepository userRepository;
     private final CustomerRepository customerRepository;
 
-    public RepositoryBasedUserService(UserRepository userRepository, CustomerRepository customerRepository) {
+    public RepositoryBasedIAMService(UserRepository userRepository, CustomerRepository customerRepository) {
         this.userRepository = userRepository;
         this.customerRepository = customerRepository;
     }

@@ -3,11 +3,11 @@ package com.bader.infrastructure.persitence.rental;
 import com.bader.domain.rental.model.CartEntry;
 import com.bader.domain.rental.model.Reservation;
 import com.bader.domain.rental.repository.ReservationRepository;
+import com.bader.infrastructure.persitence.IAM.JPACustomerRepository;
+import com.bader.infrastructure.persitence.IAM.entity.CustomerEntity;
 import com.bader.infrastructure.persitence.catalog.JPACatalogRepository;
 import com.bader.infrastructure.persitence.catalog.entity.CarEntity;
 import com.bader.infrastructure.persitence.rental.entity.ReservationEntity;
-import com.bader.infrastructure.persitence.user.JPACustomerRepository;
-import com.bader.infrastructure.persitence.user.entity.CustomerEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;

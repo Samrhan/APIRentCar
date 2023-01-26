@@ -1,6 +1,6 @@
-package com.bader.domain.user.repository;
+package com.bader.domain.IAM.repository;
 
-import com.bader.domain.user.model.User;
+import com.bader.domain.IAM.model.User;
 
 import java.util.Optional;
 

@@ -1,6 +1,6 @@
-package com.bader.infrastructure.persitence.user;
+package com.bader.infrastructure.persitence.IAM;
 
-import com.bader.infrastructure.persitence.user.entity.AuthorityEntity;
+import com.bader.infrastructure.persitence.IAM.entity.AuthorityEntity;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.UUID;

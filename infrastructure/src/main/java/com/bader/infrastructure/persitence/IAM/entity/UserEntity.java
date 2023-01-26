@@ -1,7 +1,7 @@
-package com.bader.infrastructure.persitence.user.entity;
+package com.bader.infrastructure.persitence.IAM.entity;
 
-import com.bader.domain.user.model.Authority;
-import com.bader.domain.user.model.User;
+import com.bader.domain.IAM.model.Authority;
+import com.bader.domain.IAM.model.User;
 import org.springframework.data.annotation.PersistenceCreator;
 
 import javax.persistence.*;

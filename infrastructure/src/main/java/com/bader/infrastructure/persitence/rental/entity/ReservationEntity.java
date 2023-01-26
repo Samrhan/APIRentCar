@@ -1,8 +1,8 @@
 package com.bader.infrastructure.persitence.rental.entity;
 
 import com.bader.domain.rental.model.Reservation;
+import com.bader.infrastructure.persitence.IAM.entity.CustomerEntity;
 import com.bader.infrastructure.persitence.catalog.entity.CarEntity;
-import com.bader.infrastructure.persitence.user.entity.CustomerEntity;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.PersistenceCreator;

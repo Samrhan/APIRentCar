@@ -1,6 +1,6 @@
-package com.bader.infrastructure.persitence.user.entity;
+package com.bader.infrastructure.persitence.IAM.entity;
 
-import com.bader.domain.user.model.Customer;
+import com.bader.domain.IAM.model.Customer;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.PersistenceCreator;

@@ -1,4 +1,4 @@
-package com.bader.ports.web.auth.dto;
+package com.bader.ports.web.IAM.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,6 +1,6 @@
-package com.bader.infrastructure.persitence.user;
+package com.bader.infrastructure.persitence.IAM;
 
-import com.bader.infrastructure.persitence.user.entity.CustomerEntity;
+import com.bader.infrastructure.persitence.IAM.entity.CustomerEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

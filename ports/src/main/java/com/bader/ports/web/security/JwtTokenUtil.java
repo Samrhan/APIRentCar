@@ -1,6 +1,6 @@
 package com.bader.ports.web.security;
 
-import com.bader.ports.web.auth.dto.LoginRequest;
+import com.bader.ports.web.IAM.dto.LoginRequest;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

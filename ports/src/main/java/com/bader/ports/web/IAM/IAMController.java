@@ -1,11 +1,11 @@
-package com.bader.ports.web.auth;
+package com.bader.ports.web.IAM;
 
-import com.bader.domain.user.UserService;
-import com.bader.domain.user.model.Customer;
-import com.bader.ports.web.auth.dto.CustomerDetailResponse;
-import com.bader.ports.web.auth.dto.CustomerIdResponse;
-import com.bader.ports.web.auth.dto.LoginRequest;
-import com.bader.ports.web.auth.dto.RegisterCustomerRequest;
+import com.bader.domain.IAM.IAMService;
+import com.bader.domain.IAM.model.Customer;
+import com.bader.ports.web.IAM.dto.CustomerDetailResponse;
+import com.bader.ports.web.IAM.dto.CustomerIdResponse;
+import com.bader.ports.web.IAM.dto.LoginRequest;
+import com.bader.ports.web.IAM.dto.RegisterCustomerRequest;
 import com.bader.ports.web.security.JwtTokenUtil;
 import com.bader.ports.web.security.SecurityConfiguration;
 import org.springframework.http.HttpHeaders;
@@ -22,19 +22,19 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/iam")
-public class AuthController {
+public class IAMController {
     private final AuthenticationManager authenticationManager;
 
     private final JwtTokenUtil jwtTokenUtil;
 
-    private final UserService userService;
+    private final IAMService IAMService;
 
     private final PasswordEncoder passwordEncoder;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UserService userService, PasswordEncoder passwordEncoder) {
+    public IAMController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, IAMService IAMService, PasswordEncoder passwordEncoder) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
-        this.userService = userService;
+        this.IAMService = IAMService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -53,21 +53,21 @@ public class AuthController {
     @PostMapping("/register/customer")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Object> registerCustomer(@RequestBody @Valid RegisterCustomerRequest registerCustomerRequest) {
-        boolean userWasAdded = userService.registerCustomer(registerCustomerRequest.getUsername(), passwordEncoder.encode(registerCustomerRequest.getPassword()), SecurityConfiguration.CUSTOMER, registerCustomerRequest.getFirstName(), registerCustomerRequest.getLastName());
+        boolean userWasAdded = IAMService.registerCustomer(registerCustomerRequest.getUsername(), passwordEncoder.encode(registerCustomerRequest.getPassword()), SecurityConfiguration.CUSTOMER, registerCustomerRequest.getFirstName(), registerCustomerRequest.getLastName());
         return userWasAdded ? ResponseEntity.ok().build() : ResponseEntity.status(409).build();
     }
 
     @PostMapping("/register/seller")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Object> registerSeller(@RequestBody @Valid LoginRequest loginRequest) {
-        boolean userWasAdded = userService.registerSeller(loginRequest.getUsername(), passwordEncoder.encode(loginRequest.getPassword()), SecurityConfiguration.SELLER);
+        boolean userWasAdded = IAMService.registerSeller(loginRequest.getUsername(), passwordEncoder.encode(loginRequest.getPassword()), SecurityConfiguration.SELLER);
         return userWasAdded ? ResponseEntity.ok().build() : ResponseEntity.status(409).build();
     }
 
     @GetMapping("/customer/{id}")
     public ResponseEntity<CustomerDetailResponse> getCustomerDetails(@PathVariable("id") UUID id) {
         return ResponseEntity.of(
-                userService.getCustomer(id)
+                IAMService.getCustomer(id)
                         .map(this::toCustomerDetailResponse)
         );
     }
@@ -75,7 +75,7 @@ public class AuthController {
     @GetMapping("/customer/search")
     public ResponseEntity<CustomerIdResponse> findCustomerByEmail(@RequestParam String email) {
         return ResponseEntity.of(
-                userService.getCustomerByEmail(email).map(this::toCustomerIdResponse)
+                IAMService.getCustomerByEmail(email).map(this::toCustomerIdResponse)
         );
     }
 

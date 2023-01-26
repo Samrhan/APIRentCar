@@ -1,7 +1,7 @@
-package com.bader.infrastructure.persitence.user.entity;
+package com.bader.infrastructure.persitence.IAM.entity;
 
 
-import com.bader.domain.user.model.Authority;
+import com.bader.domain.IAM.model.Authority;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;

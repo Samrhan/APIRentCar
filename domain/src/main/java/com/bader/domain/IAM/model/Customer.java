@@ -1,4 +1,4 @@
-package com.bader.domain.user.model;
+package com.bader.domain.IAM.model;
 
 import java.util.UUID;
 

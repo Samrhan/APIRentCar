@@ -1,7 +1,7 @@
 package com.bader.infrastructure.persitence.rental;
 
+import com.bader.infrastructure.persitence.IAM.entity.CustomerEntity;
 import com.bader.infrastructure.persitence.rental.entity.CartEntryEntity;
-import com.bader.infrastructure.persitence.user.entity.CustomerEntity;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
