@@ -2,15 +2,12 @@ package com.bader.infrastructure.persitence.user.entity;
 
 import com.bader.domain.user.model.Authority;
 import com.bader.domain.user.model.User;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.PersistenceCreator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -54,7 +51,7 @@ public class UserEntity implements Serializable {
         return username;
     }
 
-    public User toUser() {
+    public User toModel() {
         List<Authority> authorities = new ArrayList<>();
         for (AuthorityEntity authorityEntity : this.authorities) {
             authorities.add(authorityEntity.toAuthority());

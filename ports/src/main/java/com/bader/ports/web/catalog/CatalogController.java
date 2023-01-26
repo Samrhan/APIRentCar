@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/catalog")
 public class CatalogController {
-    CatalogService catalogService;
+    private final CatalogService catalogService;
 
     CatalogController(CatalogService catalogService) {
         this.catalogService = catalogService;

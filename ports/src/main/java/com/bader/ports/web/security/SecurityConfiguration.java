@@ -59,11 +59,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .mvcMatchers(HttpMethod.GET, "/catalog/**").permitAll() // GET requests don't need auth
+                .mvcMatchers(HttpMethod.GET, "/search/**").permitAll()
                 .and()
                 .authorizeRequests()
+                .mvcMatchers(HttpMethod.GET, "/iam/**").authenticated()
                 .mvcMatchers(HttpMethod.POST, "/catalog/**").authenticated() // All other need auth
                 .mvcMatchers(HttpMethod.PUT, "/catalog/**").authenticated() // All other need auth
                 .mvcMatchers(HttpMethod.DELETE, "/catalog/**").authenticated() // All other need auth
+                .and()
+                .authorizeRequests()
+                .mvcMatchers("/rental/**").authenticated()
                 .and()
                 .authorizeRequests()
                 .anyRequest().denyAll()
