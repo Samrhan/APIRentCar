@@ -6,8 +6,8 @@
     <modules>
         <module>application</module>
         <module>domain</module>
-        <module>infrastructure</module>
-        <module>ports</module>
+        <module>adapters</module>
+        <module>controllers</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
