@@ -28,7 +28,8 @@ docker compose down -v
 
 ## Usage
 
-You can test the system using the postman project bundled with our submission.
+You can test the system using the postman project bundled with our submission, or saved in this repo (
+named `Software Systems Architecture project.postman_collection.json`).
 
 ## Authors
 

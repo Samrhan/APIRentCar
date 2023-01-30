@@ -1,0 +1,864 @@
+{
+	"info": {
+		"_postman_id": "2d8c2459-f858-4241-a462-54cecfaf710b",
+		"name": "Software Systems Architecture project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "IAM",
+			"item": [
+				{
+					"name": "Register customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"enzo.filangi@efrei.net\",\n    \"password\": \"password\",\n    \"firstName\": \"Enzo\",\n    \"lastName\": \"Filangi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/iam/register/customer",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"iam",
+								"register",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register seller",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"samuel.bader@efrei.net\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/iam/register/seller",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"iam",
+								"register",
+								"seller"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login as customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let authorizationHeader = pm.response.headers.filter(header => header.key === \"Authorization\")[0];",
+									"let token = authorizationHeader.value.split(\" \")[1]",
+									"// If the body is not empty, save the customer's id",
+									"try {",
+									"    pm.globals.set(\"bearerToken\", token);",
+									"} catch (_){} // Do nothing if the body is empty"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"enzo.filangi@efrei.net\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/iam/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"iam",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login as seller",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let authorizationHeader = pm.response.headers.filter(header => header.key === \"Authorization\")[0];",
+									"let token = authorizationHeader.value.split(\" \")[1]",
+									"// If the body is not empty, save the customer's id",
+									"try {",
+									"    pm.globals.set(\"bearerToken\", token);",
+									"} catch (_){} // Do nothing if the body is empty"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"enzo.filangi@efrei.net\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/iam/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"iam",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Does a customer with this email exist ? (yes)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody)",
+									"// If the body is not empty, save the first car's id",
+									"try {",
+									"    pm.globals.set(\"customerId\", jsonData['id']);",
+									"} catch (e){",
+									"    console.log(e)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/iam/customer/search?email=enzo.filangi@efrei.net",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"iam",
+								"customer",
+								"search"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "enzo.filangi@efrei.net"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Does a customer with this email exist ? (no)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/iam/customer/search?email=this-email-does-not-exist@fake.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"iam",
+								"customer",
+								"search"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "this-email-does-not-exist@fake.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get customer detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/iam/customer/{{customerId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"iam",
+								"customer",
+								"{{customerId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Catalog management service",
+			"item": [
+				{
+					"name": "Add a car to catalog",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"T\",\n    \"brand\": \"Ford\",\n    \"color\": \"White\",\n    \"year\": \"2018\",\n    \"price\": 10.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/catalog",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"catalog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all cars in the catalog",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody)",
+									"// If the body is not empty, save the first car's id",
+									"try {",
+									"    console.log(jsonData[0]['id'])",
+									"    pm.globals.set(\"carId\", jsonData[0]['id']);",
+									"} catch (e){",
+									"    console.log(e)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/catalog",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"catalog"
+							]
+						},
+						"description": "Fetches the list of cars and saves the id of the first one into the `carId` variable"
+					},
+					"response": []
+				},
+				{
+					"name": "Get the details of a specific car",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/catalog/{{carId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"catalog",
+								"{{carId}}"
+							]
+						},
+						"description": "Fetches the details of a car. To do so, it uses the `carId` variables set by the `Get all cars in the catalog` request"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit a car",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"3\",\n    \"brand\": \"Tesla\",\n    \"color\": \"Black\",\n    \"year\": \"2020\",\n    \"price\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/catalog/{{carId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"catalog",
+								"{{carId}}"
+							]
+						},
+						"description": "Edits the car with id `carId`"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a car",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/catalog/{{carId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"catalog",
+								"{{carId}}"
+							]
+						},
+						"description": "Deletes the car with id `carId`"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rental service",
+			"item": [
+				{
+					"name": "Cart",
+					"item": [
+						{
+							"name": "Get cart",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/rental/cart",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rental",
+										"cart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Clear cart",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/rental/cart",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rental",
+										"cart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add cart item",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = JSON.parse(responseBody)",
+											"// If the body is not empty, save the customer's id",
+											"try {",
+											"    pm.globals.set(\"cartItemId\", jsonData['id']);",
+											"} catch (_){} // Do nothing if the body is empty"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"carId\", pm.globals.get(\"carId\"));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"carId\": \"{{carId}}\",\n    \"startDate\": \"2023-06-06\",\n    \"endDate\": \"2023-06-10\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/rental/cart",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rental",
+										"cart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete cart item",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/rental/cart/{{cartItemId}}",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rental",
+										"cart",
+										"{{cartItemId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Reservations",
+					"item": [
+						{
+							"name": "Pay for current cart",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cardNumber\": \"1234123412341234\",\n    \"securityCode\": \"123\",\n    \"expirationDate\": \"03/30\",\n    \"ownerName\": \"Enzo Filangi\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/rental/cart/pay",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rental",
+										"cart",
+										"pay"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get car reservations between",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/rental/car/{{carId}}/reservations?searchStartDate=2023-01-01&searchEndDate=2023-12-31",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rental",
+										"car",
+										"{{carId}}",
+										"reservations"
+									],
+									"query": [
+										{
+											"key": "searchStartDate",
+											"value": "2023-01-01"
+										},
+										{
+											"key": "searchEndDate",
+											"value": "2023-12-31"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get my future reservations",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/rental/reservations?timeCriteria=future",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rental",
+										"reservations"
+									],
+									"query": [
+										{
+											"key": "timeCriteria",
+											"value": "future"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get my past reservations",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/rental/reservations?timeCriteria=past",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rental",
+										"reservations"
+									],
+									"query": [
+										{
+											"key": "timeCriteria",
+											"value": "past"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all my reservations",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/rental/reservations?timeCriteria=all",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rental",
+										"reservations"
+									],
+									"query": [
+										{
+											"key": "timeCriteria",
+											"value": "all"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add reservation (as seller)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"customerId\", pm.globals.get(\"customerId\"));",
+											"pm.collectionVariables.set(\"carId\", pm.globals.get(\"carId\"));"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = JSON.parse(responseBody)",
+											"// If the body is not empty, save the customer's id",
+											"try {",
+											"    pm.globals.set(\"reservationId\", jsonData['id']);",
+											"} catch (_){} // Do nothing if the body is empty"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"customerId\": \"{{customerId}}\",\n    \"carId\": \"{{carId}}\",\n    \"startDate\": \"2023-07-06\",\n    \"endDate\": \"2023-07-10\",\n    \"paid\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/rental/reservations",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rental",
+										"reservations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mark reservation as paid (as seller)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"customerId\", pm.globals.get(\"customerId\"));",
+											"pm.collectionVariables.set(\"carId\", pm.globals.get(\"carId\"));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"customerId\": \"{{customerId}}\",\n    \"carId\": \"{{carId}}\",\n    \"startDate\": \"2023-07-06\",\n    \"endDate\": \"2023-07-10\",\n    \"paid\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/rental/reservations/{{reservationId}}/pay",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rental",
+										"reservations",
+										"{{reservationId}}",
+										"pay"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Search service",
+			"item": [
+				{
+					"name": "Search for a car according to different (optional) criterias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/search?model=T&brand=Ford&color=White&year=2018&price-min=1&price-max=100",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "model",
+									"value": "T"
+								},
+								{
+									"key": "brand",
+									"value": "Ford"
+								},
+								{
+									"key": "color",
+									"value": "White"
+								},
+								{
+									"key": "year",
+									"value": "2018"
+								},
+								{
+									"key": "price-min",
+									"value": "1"
+								},
+								{
+									"key": "price-max",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearerToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
