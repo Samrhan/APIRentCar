@@ -11,3 +11,12 @@ services:
       - "5435:5432"
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+
+  api-rentcar:
+    build:
+      context: ./
+    depends_on:
+      - postgres-rentcar
+    ports:
+      - 8080:8080
+    restart: unless-stopped
