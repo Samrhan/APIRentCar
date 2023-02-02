@@ -24,7 +24,7 @@ To stop the containers, run:
 docker compose down -v
 ```
 
-(Or simply hit ctrl+c if ran with the `-d` flag)
+(Or simply hit ctrl+c if ran without the `-d` flag)
 
 ## Usage
 
